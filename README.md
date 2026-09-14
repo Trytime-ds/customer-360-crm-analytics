@@ -1,4 +1,4 @@
-\# Customer 360 \& CRM Campaign Analytics
+# Customer 360 & CRM Campaign Analytics
 
 
 
@@ -6,15 +6,15 @@ End-to-end Data Analytics and Business Intelligence portfolio project focused on
 
 
 
-The project uses the dunnhumby \*\*The Complete Journey\*\* dataset to build a reproducible analytical workflow from raw transactional data to business-ready analytical marts and Power BI dashboards.
+The project uses the dunnhumby **The Complete Journey** dataset to build a reproducible analytical workflow from raw transactional data to business-ready analytical marts and Power BI dashboards.
 
 
 
-\---
+---
 
 
 
-\## Project Objectives
+## Project Objectives
 
 
 
@@ -22,107 +22,84 @@ The project aims to build a Customer 360 analytical layer capable of supporting:
 
 
 
-\- customer behavior analysis;
+- customer behavior analysis;
 
-\- customer segmentation;
+- customer segmentation;
 
-\- RFM analysis;
+- RFM analysis;
 
-\- sales performance analysis;
+- sales performance analysis;
 
-\- descriptive CRM campaign analytics;
+- descriptive CRM campaign analytics;
 
-\- coupon redemption analysis;
+- coupon redemption analysis;
 
-\- promotion performance analysis;
+- promotion performance analysis;
 
-\- business intelligence reporting.
-
-
-
-The project focuses on \*\*descriptive and observable analytics\*\*. Causal or incremental campaign impact is outside the MVP unless the available data supports a defensible methodology.
+- business intelligence reporting.
 
 
 
-\---
+The project focuses on **descriptive and observable analytics**. Causal or incremental campaign impact is outside the MVP unless the available data supports a defensible methodology.
 
 
 
-\## Technology Stack
+---
 
 
 
-\- SQL
-
-\- Google BigQuery
-
-\- dbt Core
-
-\- Python
-
-\- Power BI
-
-\- DAX
-
-\- Git
-
-\- GitHub
+## Technology Stack
 
 
 
-\---
+- SQL
+
+- Google BigQuery
+
+- dbt Core
+
+- Python
+
+- Power BI
+
+- DAX
+
+- Git
+
+- GitHub
 
 
 
-\## High-Level Architecture
+---
 
 
+## High-Level Architecture
 
 ```text
-
 Kaggle / dunnhumby CSV
-
-&#x20;       ↓
-
+        ↓
 Google Cloud Storage
-
-&#x20;       ↓
-
+        ↓
 BigQuery
-
-customer360 \[RAW / SOURCE]
-
-&#x20;       ↓
-
+customer360 [RAW / SOURCE]
+        ↓
 dbt
-
-&#x20;       ↓
-
+        ↓
 staging
-
-&#x20;       ↓
-
+        ↓
 intermediate
-
-&#x20;       ↓
-
+        ↓
 marts
-
-&#x20;       ↓
-
-&#x20;  ┌────┴────┐
-
-&#x20;  ↓         ↓
-
+        ↓
+   ┌────┴────┐
+   ↓         ↓
 Python    Power BI
-
-&#x20;            ↓
-
-&#x20;     Insights \& Recommendations
-
+             ↓
+      Insights & Recommendations
+```
 
 
-Repository Structure
+## Repository Structure
 
 
 
@@ -140,13 +117,13 @@ images/       architecture, model and dashboard images
 
 
 
-Current Project Status
+## Current Project Status
 
 
 
-Phase 00 — Discovery \& Planning        COMPLETE
+Phase 00 — Discovery & Planning        COMPLETE
 
-Phase 01 — Repository \& Environment    IN PROGRESS
+Phase 01 — Repository & Environment    IN PROGRESS
 
 
 
@@ -162,7 +139,7 @@ dbt + BigQuery connectivity
 
 
 
-Analytical Scope
+## Analytical Scope
 
 
 
@@ -214,7 +191,7 @@ business insights and recommendations
 
 
 
-Post-MVP / Backlog
+## Post-MVP / Backlog
 
 
 
@@ -246,7 +223,7 @@ association rules
 
 
 
-Dataset
+## Dataset
 
 
 
@@ -270,7 +247,7 @@ The raw/source layer is treated as immutable. Cleaning and transformation logic 
 
 
 
-Project Status
+## Project Status
 
 
 

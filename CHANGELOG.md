@@ -1,4 +1,4 @@
-\# Changelog
+# Changelog
 
 
 
@@ -6,33 +6,33 @@ All notable project milestones and structural changes will be documented in this
 
 
 
-\---
+---
 
 
 
-\## \[Unreleased]
+## [Unreleased]
 
 
 
-\### Added
+### Added
 
 
 
-\- Initial repository structure.
+- Initial repository structure.
 
-\- Base project documentation.
+- Base project documentation.
 
-\- Initial `.gitignore`.
+- Initial `.gitignore`.
 
-\- Python dependency file placeholder.
-
-
-
-\### Project Status
+- Python dependency file placeholder.
 
 
 
-\- Phase 00 — Discovery \& Planning: complete.
+### Project Status
 
-\- Phase 01 — Repository \& Environment: in progress.
+
+
+- Phase 00 — Discovery & Planning: complete.
+
+- Phase 01 — Repository & Environment: in progress.
 
