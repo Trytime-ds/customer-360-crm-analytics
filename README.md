@@ -123,19 +123,15 @@ images/       architecture, model and dashboard images
 
 Phase 00 — Discovery & Planning        COMPLETE
 
-Phase 01 — Repository & Environment    IN PROGRESS
+Phase 01 — Repository & Environment    COMPLETE
 
 
 
 Current focus:
 
-
-
-Repository structure
-
-Environment configuration
-
-dbt + BigQuery connectivity
+Staging layer implementation
+Data Quality rules
+dbt source-to-staging transformations
 
 
 
