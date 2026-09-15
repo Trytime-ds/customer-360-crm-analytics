@@ -92,3 +92,70 @@ models:
 
       - name: current_product_size
         description: Source product-size representation. Whitespace-only values are represented as null.
+
+  - name: stg_household_demographics
+    description: >
+      Standardized household demographic attributes. One row represents one
+      household with available demographic information. This model covers only
+      the demographic subset of the full transactional customer universe.
+
+    columns:
+      - name: household_id
+        description: Unique household identifier for households with demographic data.
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_transactions')
+                field: household_id
+
+      - name: age_range
+        description: Source-defined age range of the household.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "19-24"
+                  - "25-34"
+                  - "35-44"
+                  - "45-54"
+                  - "55-64"
+                  - "65+"
+
+      - name: marital_status_code
+        description: Source marital status code. Semantics are preserved without recoding.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - A
+                  - B
+                  - U
+
+      - name: income_range
+        description: Source-defined household income range.
+        data_tests:
+          - not_null
+
+      - name: homeowner_status
+        description: Source-defined homeowner status, including explicit Unknown values.
+        data_tests:
+          - not_null
+
+      - name: household_composition
+        description: Source-defined household composition, including explicit Unknown values.
+        data_tests:
+          - not_null
+
+      - name: household_size
+        description: Source-defined household size category.
+        data_tests:
+          - not_null
+
+      - name: kid_category
+        description: Source-defined children category, including None/Unknown.
+        data_tests:
+          - not_null
