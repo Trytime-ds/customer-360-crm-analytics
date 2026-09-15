@@ -29,8 +29,8 @@ models:
 
           - relationships:
               arguments:
-                to: source('customer360', 'product')
-                field: PRODUCT_ID
+                to: ref('stg_products')
+                field: product_id
 
       - name: quantity
         description: Source quantity. Not globally comparable across all product categories.
@@ -51,3 +51,44 @@ models:
         description: Relative week number in the source dataset.
         data_tests:
           - not_null
+  
+  - name: stg_products
+    description: >
+      Standardized product master. One row represents one unique product.
+      Preserves source product attributes while converting whitespace-only
+      categorical and size values to null.
+
+    columns:
+      - name: product_id
+        description: Unique product identifier.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: manufacturer_id
+        description: Source manufacturer identifier.
+        data_tests:
+          - not_null
+
+      - name: brand_type
+        description: >
+          Product brand classification from source: National or Private.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - National
+                  - Private
+
+      - name: department
+        description: Product department. Whitespace-only source values are represented as null.
+
+      - name: commodity
+        description: Product commodity classification. Whitespace-only source values are represented as null.
+
+      - name: sub_commodity
+        description: Product sub-commodity classification. Whitespace-only source values are represented as null.
+
+      - name: current_product_size
+        description: Source product-size representation. Whitespace-only values are represented as null.
