@@ -12,3 +12,15 @@ macro-paths: ["macros"]
 clean-targets:
   - "target"
   - "dbt_packages"
+
+models:
+  customer360:
+    +schema: staging
+    +materialized: view
+
+    intermediate:
+      +schema: intermediate
+
+    marts:
+      +schema: marts
+      +materialized: table

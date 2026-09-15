@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: >
+      Clean and standardized transaction-line staging model.
+      One row represents one product within one shopping basket.
+
+    columns:
+      - name: household_id
+        description: Household identifier.
+        data_tests:
+          - not_null
+
+      - name: basket_id
+        description: Shopping basket identifier.
+        data_tests:
+          - not_null
+
+      - name: day_number
+        description: Relative day number in the source dataset.
+        data_tests:
+          - not_null
+
+      - name: product_id
+        description: Product identifier.
+        data_tests:
+          - not_null
+
+          - relationships:
+              arguments:
+                to: source('customer360', 'product')
+                field: PRODUCT_ID
+
+      - name: quantity
+        description: Source quantity. Not globally comparable across all product categories.
+        data_tests:
+          - not_null
+
+      - name: sales_value
+        description: Retailer revenue / net sales value.
+        data_tests:
+          - not_null
+
+      - name: store_id
+        description: Store identifier.
+        data_tests:
+          - not_null
+
+      - name: week_number
+        description: Relative week number in the source dataset.
+        data_tests:
+          - not_null
