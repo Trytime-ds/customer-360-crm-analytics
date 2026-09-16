@@ -220,3 +220,32 @@ models:
           - accepted_values:
               arguments:
                 values: ['TypeA', 'TypeB', 'TypeC']
+
+  - name: stg_coupons
+    description: >
+      Deduplicated associations between coupons, products and campaigns.
+      One row represents one coupon-product-campaign association.
+
+    columns:
+      - name: coupon_upc
+        description: Coupon identifier.
+        data_tests:
+          - not_null
+
+      - name: product_id
+        description: Product associated with the coupon.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+
+      - name: campaign_id
+        description: Campaign associated with the coupon.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
