@@ -249,3 +249,34 @@ models:
               arguments:
                 to: ref('stg_campaigns')
                 field: campaign_id
+
+  - name: stg_coupon_redemptions
+    description: >
+      Coupon redemption events by household.
+      One row represents one coupon redemption event for a household,
+      campaign and day.
+
+    columns:
+      - name: household_id
+        description: Household that redeemed the coupon.
+        data_tests:
+          - not_null
+
+      - name: coupon_upc
+        description: Identifier of the redeemed coupon.
+        data_tests:
+          - not_null
+
+      - name: campaign_id
+        description: Campaign associated with the redemption.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+
+      - name: day_number
+        description: Relative day number when the redemption occurred.
+        data_tests:
+          - not_null
