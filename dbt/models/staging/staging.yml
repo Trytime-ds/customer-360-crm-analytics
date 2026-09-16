@@ -192,3 +192,31 @@ models:
         description: Relative day number when the campaign ends.
         data_tests:
           - not_null
+
+  - name: stg_campaign_assignments
+    description: >
+      Household assignments to marketing campaigns.
+      One row represents one household assigned to one campaign.
+
+    columns:
+      - name: household_id
+        description: Unique identifier of the household.
+        data_tests:
+          - not_null
+
+      - name: campaign_id
+        description: Unique identifier of the campaign.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_campaigns')
+                field: campaign_id
+
+      - name: campaign_type
+        description: Campaign type provided by the source.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['TypeA', 'TypeB', 'TypeC']
