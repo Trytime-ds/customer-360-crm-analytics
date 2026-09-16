@@ -159,3 +159,36 @@ models:
         description: Source-defined children category, including None/Unknown.
         data_tests:
           - not_null
+
+  - name: stg_campaigns
+    description: >
+      Standardized campaign definitions. One row represents one unique campaign
+      with its source-defined type and relative start/end day interval.
+
+    columns:
+      - name: campaign_id
+        description: Unique campaign identifier.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: campaign_type
+        description: Source-defined campaign type.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - TypeA
+                  - TypeB
+                  - TypeC
+
+      - name: start_day_number
+        description: Relative day number when the campaign starts.
+        data_tests:
+          - not_null
+
+      - name: end_day_number
+        description: Relative day number when the campaign ends.
+        data_tests:
+          - not_null
