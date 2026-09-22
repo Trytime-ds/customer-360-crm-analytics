@@ -1,0 +1,104 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: >
+      Customer dimension for the transactional household universe. One row represents
+      one household observed in transactions. Demographic attributes are optional and
+      are left joined so households without demographic coverage remain in the model.
+
+    columns:
+      - name: household_id
+        description: Unique household identifier.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: age_range
+        description: Source-defined age range when demographic data is available.
+
+      - name: marital_status_code
+        description: Source marital status code when demographic data is available.
+
+      - name: income_range
+        description: Source-defined household income range when demographic data is available.
+
+      - name: homeowner_status
+        description: Source-defined homeowner status when demographic data is available.
+
+      - name: household_composition
+        description: Source-defined household composition when demographic data is available.
+
+      - name: household_size
+        description: Source-defined household size category when demographic data is available.
+
+      - name: kid_category
+        description: Source-defined children category when demographic data is available.
+
+      - name: has_demographic_profile
+        description: True when the household has a matching demographic record.
+        data_tests:
+          - not_null
+
+  - name: dim_product
+    description: >
+      Product dimension. One row represents one unique product and preserves the
+      standardized descriptive attributes from staging.
+
+    columns:
+      - name: product_id
+        description: Unique product identifier.
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_campaign
+    description: >
+      Campaign dimension. One row represents one campaign. Includes both the scheduled
+      source interval and the effective observed interval capped at the Customer 360
+      analytical snapshot DAY 711.
+
+    columns:
+      - name: campaign_id
+        description: Unique campaign identifier.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: campaign_type
+        description: Source-defined campaign type.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['TypeA', 'TypeB', 'TypeC']
+
+      - name: start_day_number
+        description: Scheduled relative start day.
+        data_tests:
+          - not_null
+
+      - name: end_day_number
+        description: Scheduled relative end day.
+        data_tests:
+          - not_null
+
+      - name: observed_end_day_number
+        description: Effective campaign end for analysis, capped at DAY 711.
+        data_tests:
+          - not_null
+
+      - name: scheduled_campaign_days
+        description: Inclusive duration of the scheduled source campaign interval.
+        data_tests:
+          - not_null
+
+      - name: observed_campaign_days
+        description: Inclusive duration observable through the DAY 711 analytical snapshot.
+        data_tests:
+          - not_null
+
+      - name: is_fully_observed
+        description: True when the scheduled campaign ends on or before DAY 711.
+        data_tests:
+          - not_null
