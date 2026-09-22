@@ -39,6 +39,7 @@ All notable project milestones and structural changes will be documented in this
 - Promotion logic resolves source data to `product_id + store_id + week_number` before joining to transactions.
 - Corrected promotion semantics so source `display='A'` is treated as In-Shelf and does not qualify as special display by itself.
 - RFM accepted-value tests explicitly compare integer values in BigQuery.
+- Renamed the misleading `New Customers` RFM segment to `Recent Low-Frequency` after analytical QA showed those customers were recent but not necessarily new.
 
 ### Data Quality & Validation
 
@@ -51,6 +52,8 @@ All notable project milestones and structural changes will be documented in this
 - Customer, campaign and promotion marts include grain, coverage and business-rule tests.
 - Phase 05 closed with **8/8 staging models implemented** and **73/73 staging tests passing**.
 - Full project validation completed with `dbt build`: **PASS=243, WARN=0, ERROR=0, SKIP=0**.
+- Analytical QA validated customer, RFM, campaign and promotion outputs before BI consumption.
+- RFM segment model revalidated after semantic relabeling: **PASS=6, WARN=0, ERROR=0, SKIP=0**.
 
 ### Project Status
 
@@ -61,8 +64,8 @@ All notable project milestones and structural changes will be documented in this
 - Phase 04 — Data Quality: complete.
 - Phase 05 — Staging & dbt: complete.
 - Phase 06 — Dimensional Modeling: core model implementation complete; ERD/documentation pending.
-- Phase 07 — Analytical Marts: core mart implementation complete; analytical output QA pending.
-- Phase 09 — Power BI: next implementation focus.
+- Phase 07 — Analytical Marts: core mart implementation and analytical output QA complete.
+- Phase 09 — Power BI: current implementation focus.
 - Known blockers: none.
 
 ### Milestones

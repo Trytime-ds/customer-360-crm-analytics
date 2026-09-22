@@ -83,9 +83,9 @@ images/       architecture, model and dashboard images
 | Phase 04 — Data Quality | ✅ Complete |
 | Phase 05 — Staging & dbt | ✅ Complete |
 | Phase 06 — Dimensional Modeling | 🟢 Core models complete; ERD/docs pending |
-| Phase 07 — Analytical Marts | 🟢 Core marts complete; output QA pending |
+| Phase 07 — Analytical Marts | ✅ Core marts + analytical QA complete |
 | Phase 08 — Python Analytics | ⏳ Complementary / deferred |
-| Phase 09 — Power BI | 🚧 Next focus |
+| Phase 09 — Power BI | 🚧 Current focus |
 | Phase 10 — Insights & Recommendations | ⏳ Pending |
 | Phase 11 — Portfolio Packaging | ⏳ Pending |
 
@@ -151,8 +151,6 @@ SKIP=0
 ### Current focus
 
 ```text
-Analytical output QA
-        ↓
 Power BI semantic model
         ↓
 DAX measures
@@ -208,4 +206,27 @@ The raw/source layer is treated as immutable. Cleaning and transformation logic 
 
 ## Project Status
 
-**Work in progress — analytical QA complete next, then Power BI.**
+**Work in progress — Phase 09: Power BI.**
+
+
+### Analytical QA checkpoint
+
+Analytical QA confirmed:
+- customer universe = **2,500 households**;
+- demographic coverage = **801 households**;
+- repeat customers = **99.88%**;
+- total Customer 360 revenue = **8,057,463.08**;
+- promotion coverage = **WEEK 9–101 (93 weeks)**;
+- promotional basket rate = **55.66%**;
+- promotional revenue share = **19.62%**;
+- campaign metrics remained within valid descriptive ranges;
+- the low-frequency recent RFM segment was renamed to `Recent Low-Frequency` after semantic review.
+
+The RFM segment model was revalidated after the semantic correction with:
+
+```text
+PASS=6
+WARN=0
+ERROR=0
+SKIP=0
+```
