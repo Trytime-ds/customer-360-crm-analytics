@@ -14,7 +14,7 @@ select
 
         when recency_score = 5
             and frequency_score = 1
-            then 'New Customers'
+            then 'Recent Low-Frequency'
 
         when recency_score >= 4
             and frequency_score between 2 and 3
