@@ -71,7 +71,7 @@ select
     campaign.campaign_type,
     campaign.start_day_number,
     campaign.observed_end_day_number,
-    campaign.is_fully_observed,
+    campaign_dim.is_fully_observed,
 
     campaign.targeted_households,
     safe_divide(
@@ -98,6 +98,8 @@ select
     ) as targeted_household_revenue_share_during_campaign
 
 from campaign_rollup as campaign
+inner join {{ ref('dim_campaign') }} as campaign_dim
+    using (campaign_id)
 left join all_customer_window_revenue as window_revenue
     using (campaign_id)
 cross join customer_universe
