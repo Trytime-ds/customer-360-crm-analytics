@@ -2,103 +2,182 @@ version: 2
 
 models:
   - name: dim_customer
-    description: >
-      Customer dimension for the transactional household universe. One row represents
-      one household observed in transactions. Demographic attributes are optional and
-      are left joined so households without demographic coverage remain in the model.
-
+    description: Customer dimension for the full transactional household universe.
     columns:
       - name: household_id
-        description: Unique household identifier.
-        data_tests:
-          - not_null
-          - unique
-
-      - name: age_range
-        description: Source-defined age range when demographic data is available.
-
-      - name: marital_status_code
-        description: Source marital status code when demographic data is available.
-
-      - name: income_range
-        description: Source-defined household income range when demographic data is available.
-
-      - name: homeowner_status
-        description: Source-defined homeowner status when demographic data is available.
-
-      - name: household_composition
-        description: Source-defined household composition when demographic data is available.
-
-      - name: household_size
-        description: Source-defined household size category when demographic data is available.
-
-      - name: kid_category
-        description: Source-defined children category when demographic data is available.
-
+        data_tests: [not_null, unique]
       - name: has_demographic_profile
-        description: True when the household has a matching demographic record.
-        data_tests:
-          - not_null
+        data_tests: [not_null]
 
   - name: dim_product
-    description: >
-      Product dimension. One row represents one unique product and preserves the
-      standardized descriptive attributes from staging.
-
+    description: Product dimension at one row per product.
     columns:
       - name: product_id
-        description: Unique product identifier.
-        data_tests:
-          - not_null
-          - unique
+        data_tests: [not_null, unique]
 
   - name: dim_campaign
-    description: >
-      Campaign dimension. One row represents one campaign. Includes both the scheduled
-      source interval and the effective observed interval capped at the Customer 360
-      analytical snapshot DAY 711.
-
+    description: Campaign dimension with scheduled and DAY-711-observed intervals.
     columns:
       - name: campaign_id
-        description: Unique campaign identifier.
-        data_tests:
-          - not_null
-          - unique
-
+        data_tests: [not_null, unique]
       - name: campaign_type
-        description: Source-defined campaign type.
         data_tests:
           - not_null
           - accepted_values:
               arguments:
                 values: ['TypeA', 'TypeB', 'TypeC']
-
       - name: start_day_number
-        description: Scheduled relative start day.
-        data_tests:
-          - not_null
-
+        data_tests: [not_null]
       - name: end_day_number
-        description: Scheduled relative end day.
-        data_tests:
-          - not_null
-
+        data_tests: [not_null]
       - name: observed_end_day_number
-        description: Effective campaign end for analysis, capped at DAY 711.
-        data_tests:
-          - not_null
-
+        data_tests: [not_null]
       - name: scheduled_campaign_days
-        description: Inclusive duration of the scheduled source campaign interval.
-        data_tests:
-          - not_null
-
+        data_tests: [not_null]
       - name: observed_campaign_days
-        description: Inclusive duration observable through the DAY 711 analytical snapshot.
-        data_tests:
-          - not_null
-
+        data_tests: [not_null]
       - name: is_fully_observed
-        description: True when the scheduled campaign ends on or before DAY 711.
+        data_tests: [not_null]
+
+  - name: dim_store
+    description: Store key dimension covering stores observed in sales or promotions.
+    columns:
+      - name: store_id
+        data_tests: [not_null, unique]
+
+  - name: dim_relative_time
+    description: Relative day/week dimension without inventing calendar dates.
+    columns:
+      - name: day_number
+        data_tests: [not_null, unique]
+      - name: week_number
+        data_tests: [not_null]
+
+  - name: fact_sales
+    description: Sales fact; one row is one product line within one shopping basket.
+    columns:
+      - name: household_id
         data_tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: household_id
+      - name: basket_id
+        data_tests: [not_null]
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: day_number
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_relative_time')
+                field: day_number
+      - name: sales_value
+        data_tests: [not_null]
+
+  - name: fact_campaign_received
+    description: >
+      Campaign receipt/assignment fact; one row is one household assigned to one
+      campaign. The name deliberately avoids claiming verified exposure.
+    columns:
+      - name: household_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: household_id
+      - name: campaign_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_campaign')
+                field: campaign_id
+
+  - name: fact_coupon_redemption
+    description: Coupon redemption fact; one row is one observed redemption event.
+    columns:
+      - name: household_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: household_id
+      - name: coupon_upc
+        data_tests: [not_null]
+      - name: campaign_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_campaign')
+                field: campaign_id
+      - name: day_number
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_relative_time')
+                field: day_number
+
+  - name: fact_promotions
+    description: Product-store-week promotion fact resolved from raw promotion conditions.
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: week_number
+        data_tests: [not_null]
+      - name: has_any_promotion
+        data_tests: [not_null]
+
+  - name: mart_customer_360
+    description: >
+      Customer-level mart combining demographics, behavior, percentile-based RFM,
+      campaign receipt history and coupon redemption activity.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: recency_days
+        data_tests: [not_null]
+      - name: basket_count
+        data_tests: [not_null]
+      - name: monetary_value
+        data_tests: [not_null]
+      - name: average_order_value
+        data_tests: [not_null]
+      - name: rfm_total_score
+        data_tests: [not_null]
+      - name: rfm_code
+        data_tests: [not_null]
+      - name: campaigns_received
+        data_tests: [not_null]
+      - name: coupon_redemption_events
+        data_tests: [not_null]
