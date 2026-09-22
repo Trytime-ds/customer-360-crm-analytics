@@ -37,18 +37,21 @@ models:
           - accepted_values:
               arguments:
                 values: [1, 2, 3, 4, 5]
+                quote: false
       - name: frequency_score
         data_tests:
           - not_null
           - accepted_values:
               arguments:
                 values: [1, 2, 3, 4, 5]
+                quote: false
       - name: monetary_score
         data_tests:
           - not_null
           - accepted_values:
               arguments:
                 values: [1, 2, 3, 4, 5]
+                quote: false
       - name: rfm_total_score
         data_tests: [not_null]
       - name: rfm_code
