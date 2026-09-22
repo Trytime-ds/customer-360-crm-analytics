@@ -198,7 +198,7 @@ models:
                 values:
                   - Champions
                   - Loyal Customers
-                  - New Customers
+                  - Recent Low-Frequency
                   - Potential Loyalists
                   - At Risk
                   - Hibernating
