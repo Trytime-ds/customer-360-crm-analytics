@@ -1,0 +1,245 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: Customer dimension for the full transactional household universe.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: has_demographic_profile
+        data_tests: [not_null]
+
+  - name: dim_product
+    description: Product dimension at one row per product.
+    columns:
+      - name: product_id
+        data_tests: [not_null, unique]
+
+  - name: dim_campaign
+    description: Campaign dimension with scheduled and DAY-711-observed intervals.
+    columns:
+      - name: campaign_id
+        data_tests: [not_null, unique]
+      - name: campaign_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['TypeA', 'TypeB', 'TypeC']
+      - name: start_day_number
+        data_tests: [not_null]
+      - name: end_day_number
+        data_tests: [not_null]
+      - name: observed_end_day_number
+        data_tests: [not_null]
+      - name: scheduled_campaign_days
+        data_tests: [not_null]
+      - name: observed_campaign_days
+        data_tests: [not_null]
+      - name: is_fully_observed
+        data_tests: [not_null]
+
+  - name: dim_store
+    description: Store key dimension covering stores observed in sales or promotions.
+    columns:
+      - name: store_id
+        data_tests: [not_null, unique]
+
+  - name: dim_relative_time
+    description: Relative day/week dimension without inventing calendar dates.
+    columns:
+      - name: day_number
+        data_tests: [not_null, unique]
+      - name: week_number
+        data_tests: [not_null]
+
+  - name: fact_sales
+    description: Sales fact; one row is one product line within one shopping basket.
+    columns:
+      - name: household_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: household_id
+      - name: basket_id
+        data_tests: [not_null]
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: day_number
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_relative_time')
+                field: day_number
+      - name: sales_value
+        data_tests: [not_null]
+
+  - name: fact_campaign_received
+    description: >
+      Campaign receipt/assignment fact; one row is one household assigned to one
+      campaign. The name deliberately avoids claiming verified exposure.
+    columns:
+      - name: household_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: household_id
+      - name: campaign_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_campaign')
+                field: campaign_id
+
+  - name: fact_coupon_redemption
+    description: Coupon redemption fact; one row is one observed redemption event.
+    columns:
+      - name: household_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: household_id
+      - name: coupon_upc
+        data_tests: [not_null]
+      - name: campaign_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_campaign')
+                field: campaign_id
+      - name: day_number
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_relative_time')
+                field: day_number
+
+  - name: fact_promotions
+    description: Product-store-week promotion fact resolved from raw promotion conditions.
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: store_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+      - name: week_number
+        data_tests: [not_null]
+      - name: has_any_promotion
+        data_tests: [not_null]
+
+  - name: mart_customer_360
+    description: >
+      Customer-level mart combining demographics, behavior, percentile-based RFM,
+      campaign receipt history and coupon redemption activity.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: recency_days
+        data_tests: [not_null]
+      - name: basket_count
+        data_tests: [not_null]
+      - name: monetary_value
+        data_tests: [not_null]
+      - name: average_order_value
+        data_tests: [not_null]
+      - name: rfm_total_score
+        data_tests: [not_null]
+      - name: rfm_code
+        data_tests: [not_null]
+      - name: campaigns_received
+        data_tests: [not_null]
+      - name: coupon_redemption_events
+        data_tests: [not_null]
+
+  - name: mart_customer_segments
+    description: >
+      Customer 360 mart enriched with a transparent rule-based RFM segmentation.
+      Segment labels are a project-specific analytical mapping, not a universal
+      industry standard. One row represents one household.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: customer_segment
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Champions
+                  - Loyal Customers
+                  - Recent Low-Frequency
+                  - Potential Loyalists
+                  - At Risk
+                  - Hibernating
+                  - Needs Attention
+
+  - name: mart_campaign_performance
+    description: >
+      Campaign-level descriptive performance mart. Metrics describe behavior observed
+      among targeted households during each effective campaign window and do not imply
+      causal lift or incremental revenue.
+    columns:
+      - name: campaign_id
+        data_tests: [not_null, unique]
+      - name: targeted_households
+        data_tests: [not_null]
+      - name: customers_purchasing_during_campaign
+        data_tests: [not_null]
+      - name: targeted_purchase_rate
+        data_tests: [not_null]
+      - name: unique_redeemers
+        data_tests: [not_null]
+      - name: household_redemption_rate
+        data_tests: [not_null]
+      - name: revenue_during_campaign
+        data_tests: [not_null]
+
+  - name: mart_promotion_performance
+    description: >
+      Weekly descriptive promotion-performance mart for the valid promotion horizon
+      WEEK 9-101. Promotional condition means safe product-store-week match with
+      special display and/or mailer; In-Shelf alone is not promotional.
+    columns:
+      - name: week_number
+        data_tests: [not_null, unique]
+      - name: total_baskets
+        data_tests: [not_null]
+      - name: promotional_baskets
+        data_tests: [not_null]
+      - name: promotional_basket_rate
+        data_tests: [not_null]
+      - name: total_revenue
+        data_tests: [not_null]
+      - name: promotional_revenue
+        data_tests: [not_null]

@@ -1,0 +1,137 @@
+version: 2
+
+models:
+  - name: int_customer_metrics
+    description: >
+      Customer-level transactional metrics for the frozen Customer 360 / RFM
+      observation window (DAY 1-711). One row represents one household observed
+      in stg_transactions.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: first_purchase_day
+        data_tests: [not_null]
+      - name: last_purchase_day
+        data_tests: [not_null]
+      - name: recency_days
+        data_tests: [not_null]
+      - name: basket_count
+        data_tests: [not_null]
+      - name: monetary_value
+        data_tests: [not_null]
+      - name: average_order_value
+        data_tests: [not_null]
+      - name: is_repeat_customer
+        data_tests: [not_null]
+
+  - name: int_customer_rfm
+    description: >
+      Percentile-based RFM scoring at the DAY 711 snapshot. Percent-rank scoring
+      keeps the method distribution-aware and preserves ties.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: recency_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: frequency_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: monetary_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: rfm_total_score
+        data_tests: [not_null]
+      - name: rfm_code
+        data_tests: [not_null]
+
+  - name: int_product_store_week_promotions
+    description: >
+      Promotion conditions resolved to the safe product-store-week analytical grain.
+      Special display excludes source code A (In-Shelf); a promotional condition is
+      defined as special display OR mailer.
+    columns:
+      - name: product_id
+        data_tests: [not_null]
+      - name: store_id
+        data_tests: [not_null]
+      - name: week_number
+        data_tests: [not_null]
+      - name: has_special_display
+        data_tests: [not_null]
+      - name: has_in_shelf_display
+        data_tests: [not_null]
+      - name: has_mailer
+        data_tests: [not_null]
+      - name: has_any_promotion
+        data_tests: [not_null]
+
+  - name: int_campaign_household_activity
+    description: >
+      One row per targeted household and campaign, combining observable purchases
+      during the effective campaign window and campaign-linked coupon redemptions.
+      This model is descriptive and does not attribute purchases to campaign causality.
+    columns:
+      - name: household_id
+        data_tests: [not_null]
+      - name: campaign_id
+        data_tests: [not_null]
+      - name: has_purchase_during_campaign
+        data_tests: [not_null]
+      - name: has_redemption
+        data_tests: [not_null]
+      - name: revenue_during_campaign
+        data_tests: [not_null]
+      - name: baskets_during_campaign
+        data_tests: [not_null]
+      - name: redemption_events
+        data_tests: [not_null]
+
+  - name: int_transaction_promotions
+    description: >
+      Sales lines within promotion-source coverage (WEEK 9-101) enriched using the
+      safe product-store-week promotion match. In-Shelf alone is not classified as
+      a promotional condition.
+    columns:
+      - name: household_id
+        data_tests: [not_null]
+      - name: basket_id
+        data_tests: [not_null]
+      - name: product_id
+        data_tests: [not_null]
+      - name: store_id
+        data_tests: [not_null]
+      - name: week_number
+        data_tests: [not_null]
+      - name: sales_value
+        data_tests: [not_null]
+      - name: is_promotional_line
+        data_tests: [not_null]
+
+  - name: int_basket_promotion_summary
+    description: >
+      Basket-level promotion summary for WEEK 9-101. One row represents one observed
+      basket and supports promotional basket-rate and revenue KPIs without double counting.
+    columns:
+      - name: basket_id
+        data_tests: [not_null, unique]
+      - name: household_id
+        data_tests: [not_null]
+      - name: week_number
+        data_tests: [not_null]
+      - name: basket_revenue
+        data_tests: [not_null]
+      - name: has_promotional_condition
+        data_tests: [not_null]
