@@ -182,6 +182,28 @@ models:
       - name: coupon_redemption_events
         data_tests: [not_null]
 
+  - name: mart_customer_segments
+    description: >
+      Customer 360 mart enriched with a transparent rule-based RFM segmentation.
+      Segment labels are a project-specific analytical mapping, not a universal
+      industry standard. One row represents one household.
+    columns:
+      - name: household_id
+        data_tests: [not_null, unique]
+      - name: customer_segment
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Champions
+                  - Loyal Customers
+                  - New Customers
+                  - Potential Loyalists
+                  - At Risk
+                  - Hibernating
+                  - Needs Attention
+
   - name: mart_campaign_performance
     description: >
       Campaign-level descriptive performance mart. Metrics describe behavior observed
