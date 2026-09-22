@@ -13,16 +13,19 @@ All notable project milestones and structural changes will be documented in this
 - Google BigQuery + dbt Core project configuration.
 - Eight BigQuery raw tables registered as dbt Sources.
 - Source-to-BigQuery smoke test and layer routing validation.
-- Production staging model `stg_transactions`.
-- Production staging model `stg_products`.
-- Production staging model `stg_household_demographics`.
-- Production staging model `stg_campaigns`.
-- Production staging model `stg_campaign_assignments`.
-- Production staging model `stg_coupons` with exact-row deduplication.
-- Production staging model `stg_coupon_redemptions`.
-- Production staging model `stg_promotions`.
-- Schema documentation, generic dbt tests and singular business/data-quality tests across the staging layer.
-- Tests protecting transaction grain, campaign assignment grain, coupon relationships, redemption relationships, promotion grain and temporal consistency.
+- Complete source-to-staging layer across all eight raw tables.
+- `int_customer_metrics` for reusable customer behavioral metrics.
+- `int_customer_rfm` for percentile-based RFM scoring.
+- `int_product_store_week_promotions` for safe promotion-grain resolution.
+- `int_campaign_household_activity` for campaign-window customer behavior.
+- `int_transaction_promotions` and `int_basket_promotion_summary` for promotional sales analysis.
+- Core dimensions: `dim_customer`, `dim_product`, `dim_campaign`, `dim_store`, `dim_relative_time`.
+- Core facts: `fact_sales`, `fact_campaign_received`, `fact_coupon_redemption`, `fact_promotions`.
+- `mart_customer_360`.
+- `mart_customer_segments`.
+- `mart_campaign_performance`.
+- `mart_promotion_performance`.
+- Schema documentation, generic dbt tests and singular business/data-quality tests across staging, intermediate and marts.
 
 ### Changed
 
@@ -31,19 +34,23 @@ All notable project milestones and structural changes will be documented in this
 - Converted monetary transaction fields from `FLOAT64` to BigQuery `NUMERIC`.
 - Preserved source HHMM transaction time and added a derived BigQuery `TIME` field.
 - Preserved optional household demographics as enrichment rather than treating demographic coverage as the full customer universe.
-- Preserved raw promotion codes in staging so business semantics can be resolved downstream at the appropriate analytical grain.
 - Refined the MVP execution path to prioritize dimensional modeling, analytical marts, Customer 360/RFM, campaign and promotion analytics, and Power BI before advanced Python or Machine Learning work.
+- Campaign analysis now uses observable terminology such as `Targeted Purchase Rate` and `Revenue During Campaign` rather than causal conversion language.
+- Promotion logic resolves source data to `product_id + store_id + week_number` before joining to transactions.
+- Corrected promotion semantics so source `display='A'` is treated as In-Shelf and does not qualify as special display by itself.
+- RFM accepted-value tests explicitly compare integer values in BigQuery.
 
 ### Data Quality & Validation
 
 - `stg_transactions` preserves the raw transaction row count: `2,595,732` rows.
-- HHMM-to-`TIME` conversion validated with real source values.
-- Product, household demographic and campaign staging models validated against their source grains and domains.
-- Campaign assignments validated at `household_id + campaign_id` grain.
-- Coupon staging applies controlled exact-row deduplication while preserving valid coupon/product/campaign relationships.
-- Coupon redemptions validated as observed redemption events with campaign and household relationship checks.
-- Promotions staging preserves source promotional conditions and validates the full staging grain.
-- Phase 05 closed with **8/8 staging models implemented** and **73/73 dbt tests passing**.
+- Campaign assignments are protected at `household_id + campaign_id` grain.
+- Coupon staging applies controlled exact-row deduplication while preserving valid relationships.
+- Campaign windows are capped at `DAY 711` while preserving scheduled end dates and observability flags.
+- Customer metrics use one row per transactional household and distinct basket counts for frequency.
+- Promotion joins use the validated `product_id + store_id + week_number` grain.
+- Customer, campaign and promotion marts include grain, coverage and business-rule tests.
+- Phase 05 closed with **8/8 staging models implemented** and **73/73 staging tests passing**.
+- Full project validation completed with `dbt build`: **PASS=243, WARN=0, ERROR=0, SKIP=0**.
 
 ### Project Status
 
@@ -53,7 +60,9 @@ All notable project milestones and structural changes will be documented in this
 - Phase 03 — Raw Ingestion: complete.
 - Phase 04 — Data Quality: complete.
 - Phase 05 — Staging & dbt: complete.
-- Phase 06 — Dimensional Modeling: current focus.
+- Phase 06 — Dimensional Modeling: core model implementation complete; ERD/documentation pending.
+- Phase 07 — Analytical Marts: core mart implementation complete; analytical output QA pending.
+- Phase 09 — Power BI: next implementation focus.
 - Known blockers: none.
 
 ### Milestones
@@ -66,3 +75,10 @@ All notable project milestones and structural changes will be documented in this
 - `5d0d302` — `feat: add coupons staging model with exact deduplication`.
 - `5ae4c28` — `feat: add coupon redemptions staging model and tests`.
 - `0b90fd0` — `feat: add promotions staging model and tests`.
+- `8aee134` — `feat: add customer metrics intermediate model`.
+- `1d8197a` — `feat: add core customer product and campaign dimensions`.
+- `0e009e5` — `feat: add core facts rfm and customer 360 mart`.
+- `3a9c53f` — `fix: compare RFM accepted values as integers`.
+- `5c79353` — `feat: add campaign and promotion performance marts`.
+- `c3729c5` — `fix: source campaign observability flag from dimension`.
+- `764dd36` — `feat: add customer RFM segmentation mart`.

@@ -52,7 +52,7 @@ staging
         ↓
 intermediate
         ↓
-marts
+dimensions / facts / analytical marts
         ↓
 Power BI / DAX
         ↓
@@ -82,17 +82,18 @@ images/       architecture, model and dashboard images
 | Phase 03 — Raw Ingestion | ✅ Complete |
 | Phase 04 — Data Quality | ✅ Complete |
 | Phase 05 — Staging & dbt | ✅ Complete |
-| Phase 06 — Dimensional Modeling | 🚧 Current focus |
-| Phase 07 — Analytical Marts | ⏳ Pending |
+| Phase 06 — Dimensional Modeling | 🟢 Core models complete; ERD/docs pending |
+| Phase 07 — Analytical Marts | 🟢 Core marts complete; output QA pending |
 | Phase 08 — Python Analytics | ⏳ Complementary / deferred |
-| Phase 09 — Power BI | ⏳ Pending |
+| Phase 09 — Power BI | 🚧 Next focus |
 | Phase 10 — Insights & Recommendations | ⏳ Pending |
 | Phase 11 — Portfolio Packaging | ⏳ Pending |
 
-### Staging milestone
+### dbt milestone
 
-The source-to-staging layer is complete:
+The transformation pipeline now includes:
 
+**Staging**
 - `stg_transactions`
 - `stg_products`
 - `stg_household_demographics`
@@ -102,29 +103,66 @@ The source-to-staging layer is complete:
 - `stg_coupon_redemptions`
 - `stg_promotions`
 
-All eight source tables now have production staging models with explicit grain, standardized naming, documented data-quality rules and dbt tests. The Phase 05 closeout completed with **73 dbt tests passing** and no known blockers.
+**Intermediate**
+- `int_customer_metrics`
+- `int_customer_rfm`
+- `int_product_store_week_promotions`
+- `int_campaign_household_activity`
+- `int_transaction_promotions`
+- `int_basket_promotion_summary`
+
+**Dimensions**
+- `dim_customer`
+- `dim_product`
+- `dim_campaign`
+- `dim_store`
+- `dim_relative_time`
+
+**Facts**
+- `fact_sales`
+- `fact_campaign_received`
+- `fact_coupon_redemption`
+- `fact_promotions`
+
+**Analytical marts**
+- `mart_customer_360`
+- `mart_customer_segments`
+- `mart_campaign_performance`
+- `mart_promotion_performance`
+
+A full project `dbt build` completed successfully with:
+
+```text
+PASS=243
+WARN=0
+ERROR=0
+SKIP=0
+```
+
+### Analytical design principles
+
+- Customer 360 / RFM uses the full transactional horizon `DAY 1–711`, with snapshot `DAY 711`.
+- Campaign analysis uses effective campaign windows capped at `DAY 711`.
+- Campaign KPIs are descriptive and observable; purchase during a campaign is not presented as campaign-caused conversion.
+- Promotion analytics uses the safe `product_id + store_id + week_number` grain.
+- `display='A'` is preserved as **In-Shelf** and is not treated as special display.
+- Advanced causal lift, incrementality, CLV and Machine Learning remain outside the BI-first MVP.
 
 ### Current focus
 
-The MVP is following a **BI-first path**:
-
 ```text
-Dimensional Modeling
+Analytical output QA
         ↓
-Intermediate Models & Analytical Marts
+Power BI semantic model
         ↓
-Customer 360 / RFM
+DAX measures
         ↓
-Campaign, Coupon & Promotion Analytics
+3-page dashboard
         ↓
-Power BI / DAX
-        ↓
-Business Insights
+Insights & Recommendations
         ↓
 Portfolio Packaging
 ```
-
-Advanced Python analysis, Machine Learning, CLV, churn modeling and causal campaign measurement are intentionally deferred until after the core BI MVP is complete.
 
 ## Analytical Scope
 
@@ -170,4 +208,4 @@ The raw/source layer is treated as immutable. Cleaning and transformation logic 
 
 ## Project Status
 
-**Work in progress — Phase 06: Dimensional Modeling.**
+**Work in progress — analytical QA complete next, then Power BI.**
