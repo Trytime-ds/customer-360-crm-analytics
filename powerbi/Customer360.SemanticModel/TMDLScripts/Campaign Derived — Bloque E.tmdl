@@ -1,0 +1,26 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Fully Observed Campaigns' = CALCULATE ( [Campaigns], mart_campaign_performance[is_fully_observed] = TRUE() )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Partially Observed Campaigns' = CALCULATE ( [Campaigns], mart_campaign_performance[is_fully_observed] = FALSE() )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Average Campaign Reach' = AVERAGE ( mart_campaign_performance[campaign_reach] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Assignment-Weighted Targeted Purchase Rate' = DIVIDE ( SUM ( mart_campaign_performance[customers_purchasing_during_campaign] ), SUM ( mart_campaign_performance[targeted_households] ) )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Assignment-Weighted Redemption Rate' = DIVIDE ( SUM ( mart_campaign_performance[unique_redeemers] ), SUM ( mart_campaign_performance[targeted_households] ) )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Total Campaign Redemption Events' = SUM ( mart_campaign_performance[coupon_redemption_events] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"

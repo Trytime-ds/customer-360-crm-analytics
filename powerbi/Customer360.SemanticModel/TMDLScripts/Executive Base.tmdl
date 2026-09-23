@@ -1,0 +1,14 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Total Revenue' = SUM ( fact_sales[sales_value] )
+            formatString: #,##0.00
+            displayFolder: "01 Executive"
+
+        measure 'Baskets' = DISTINCTCOUNT ( fact_sales[basket_id] )
+            formatString: #,##0
+            displayFolder: "01 Executive"
+
+        measure 'Active Customers' = DISTINCTCOUNT ( fact_sales[household_id] )
+            formatString: #,##0
+            displayFolder: "01 Executive"

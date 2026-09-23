@@ -1,0 +1,142 @@
+table mart_promotion_performance
+	lineageTag: abc553e6-bbac-4c97-92f8-adb26045f6cd
+
+	column week_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 475fe2e7-4b5d-4afc-bd0b-a5206f55dd39
+		summarizeBy: sum
+		sourceColumn: week_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_baskets
+		dataType: int64
+		formatString: 0
+		lineageTag: 47426dbf-fcb8-405f-ad7b-246725ce66d3
+		summarizeBy: sum
+		sourceColumn: total_baskets
+
+		annotation SummarizationSetBy = Automatic
+
+	column promotional_baskets
+		dataType: int64
+		formatString: 0
+		lineageTag: 55ea996f-a4eb-4b0a-a66f-902c1d9c2c6f
+		summarizeBy: sum
+		sourceColumn: promotional_baskets
+
+		annotation SummarizationSetBy = Automatic
+
+	column promotional_basket_rate
+		dataType: double
+		lineageTag: b28d50ba-d1ad-426f-8f79-73b73338f287
+		summarizeBy: sum
+		sourceColumn: promotional_basket_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_revenue
+		dataType: double
+		lineageTag: 4ea2d44f-7e71-43d5-b280-7a173d7877ad
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column promotional_revenue
+		dataType: double
+		lineageTag: d3542636-db53-4515-a140-f43bbc739ce0
+		summarizeBy: sum
+		sourceColumn: promotional_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column promotional_revenue_share
+		dataType: double
+		lineageTag: 9d2ce181-1b4e-40c0-8212-a07ae972ca3d
+		summarizeBy: sum
+		sourceColumn: promotional_revenue_share
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_under_special_display
+		dataType: double
+		lineageTag: 1c6df674-b397-4e0a-8d92-68d3a57c1ebd
+		summarizeBy: sum
+		sourceColumn: revenue_under_special_display
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_under_mailer
+		dataType: double
+		lineageTag: ae5e44e1-8c83-474c-893a-48d482d56d4b
+		summarizeBy: sum
+		sourceColumn: revenue_under_mailer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_under_in_shelf_display
+		dataType: double
+		lineageTag: 9b316cbe-ca37-4ed7-9612-ec6eade18181
+		summarizeBy: sum
+		sourceColumn: revenue_under_in_shelf_display
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baskets_with_special_display
+		dataType: int64
+		formatString: 0
+		lineageTag: b4b1bd10-63ad-411f-a355-dc16ba1d196d
+		summarizeBy: sum
+		sourceColumn: baskets_with_special_display
+
+		annotation SummarizationSetBy = Automatic
+
+	column baskets_with_mailer
+		dataType: int64
+		formatString: 0
+		lineageTag: dd33b159-19bd-45d3-986c-a4cddb2957ed
+		summarizeBy: sum
+		sourceColumn: baskets_with_mailer
+
+		annotation SummarizationSetBy = Automatic
+
+	column baskets_with_in_shelf_display
+		dataType: int64
+		formatString: 0
+		lineageTag: e1aba43b-0596-4e42-bfa0-21492290e5fe
+		summarizeBy: sum
+		sourceColumn: baskets_with_in_shelf_display
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mart_promotion_performance = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    mart_promotion_performance_Table = customer360_marts_Schema{[Name="mart_promotion_performance",Kind="Table"]}[Data]
+				in
+				    mart_promotion_performance_Table
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

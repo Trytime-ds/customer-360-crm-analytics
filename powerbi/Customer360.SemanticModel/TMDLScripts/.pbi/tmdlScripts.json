@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "tabOrder": [
+    "Executive Base",
+    "Executive Derived",
+    "Customer Base — Bloque A",
+    "Customer Base — Bloque B",
+    "Customer Derived — Bloque C",
+    "Campaign Base — Bloque D",
+    "Campaign Derived — Bloque E",
+    "Promotions Base — Bloque F",
+    "Promotions Derived — Bloque G",
+    "Customer Segment KPIs — Bloque H",
+    "Customer Segment Shares — Bloque I"
+  ],
+  "defaultTab": "Executive Derived"
+}

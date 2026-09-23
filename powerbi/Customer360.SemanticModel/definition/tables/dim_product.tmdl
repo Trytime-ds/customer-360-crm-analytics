@@ -1,0 +1,74 @@
+table dim_product
+	lineageTag: b1716c6c-8db5-4a58-9671-01c9d40e8817
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 51f0fc25-0066-4d9f-bbcc-4eaedaeffe1b
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column manufacturer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 216ddc28-c75b-4a48-91e8-ebb8acfc603a
+		summarizeBy: none
+		sourceColumn: manufacturer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department
+		dataType: string
+		lineageTag: de3e6cf1-ddff-47ed-bd4a-1ea6e9c6e5da
+		summarizeBy: none
+		sourceColumn: department
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand_type
+		dataType: string
+		lineageTag: 463c3dc9-8ade-449c-a59a-c58c5570627b
+		summarizeBy: none
+		sourceColumn: brand_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column commodity
+		dataType: string
+		lineageTag: f5041448-db85-44b3-9d4a-776abe8bfd86
+		summarizeBy: none
+		sourceColumn: commodity
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_commodity
+		dataType: string
+		lineageTag: 0b4118f6-b72c-4b44-95b2-d2c82dd57375
+		summarizeBy: none
+		sourceColumn: sub_commodity
+
+		annotation SummarizationSetBy = Automatic
+
+	column current_product_size
+		dataType: string
+		lineageTag: 516397ec-43b7-4f79-9d4f-cc7d9238f016
+		summarizeBy: none
+		sourceColumn: current_product_size
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    dim_product_Table = customer360_marts_Schema{[Name="dim_product",Kind="Table"]}[Data]
+				in
+				    dim_product_Table
+
+	annotation PBI_ResultType = Table
+

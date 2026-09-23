@@ -1,0 +1,26 @@
+model Model
+	culture: es-CL
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CL
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_customer","dim_product","dim_store","dim_relative_time","fact_sales","mart_customer_segments","mart_campaign_performance","mart_promotion_performance"]
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DevMode"]
+
+ref table dim_product
+ref table dim_store
+ref table dim_relative_time
+ref table fact_sales
+ref table mart_customer_segments
+ref table mart_campaign_performance
+ref table mart_promotion_performance
+ref table _Measures
+
+ref cultureInfo es-CL
+

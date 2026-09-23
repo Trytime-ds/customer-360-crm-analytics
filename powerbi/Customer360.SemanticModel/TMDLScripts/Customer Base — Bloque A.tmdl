@@ -1,0 +1,22 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Customers' = DISTINCTCOUNT ( mart_customer_segments[household_id] )
+            formatString: #,##0
+            displayFolder: "02 Customer"
+
+        measure 'Customer Revenue' = SUM ( mart_customer_segments[monetary_value] )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"
+
+        measure 'Average Recency Days' = AVERAGE ( mart_customer_segments[recency_days] )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"
+
+        measure 'Average Customer Baskets' = AVERAGE ( mart_customer_segments[basket_count] )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"
+
+        measure 'Average Customer Revenue' = AVERAGE ( mart_customer_segments[monetary_value] )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"

@@ -1,0 +1,14 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Average Order Value' = DIVIDE ( [Total Revenue], [Baskets] )
+            formatString: #,##0.00
+            displayFolder: "01 Executive"
+
+        measure 'Purchase Frequency' = DIVIDE ( [Baskets], [Active Customers] )
+            formatString: #,##0.00
+            displayFolder: "01 Executive"
+
+        measure 'Revenue per Customer' = DIVIDE ( [Total Revenue], [Active Customers] )
+            formatString: #,##0.00
+            displayFolder: "01 Executive"

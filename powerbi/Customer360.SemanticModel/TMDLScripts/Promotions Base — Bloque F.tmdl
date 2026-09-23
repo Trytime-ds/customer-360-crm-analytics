@@ -1,0 +1,46 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Promotion Weeks' = DISTINCTCOUNT ( mart_promotion_performance[week_number] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotion Window Baskets' = SUM ( mart_promotion_performance[total_baskets] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotional Baskets' = SUM ( mart_promotion_performance[promotional_baskets] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotion Window Revenue' = SUM ( mart_promotion_performance[total_revenue] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotional Revenue' = SUM ( mart_promotion_performance[promotional_revenue] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Revenue under Special Display' = SUM ( mart_promotion_performance[revenue_under_special_display] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Revenue under Mailer' = SUM ( mart_promotion_performance[revenue_under_mailer] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Revenue under In-Shelf Display' = SUM ( mart_promotion_performance[revenue_under_in_shelf_display] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Baskets with Special Display' = SUM ( mart_promotion_performance[baskets_with_special_display] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Baskets with Mailer' = SUM ( mart_promotion_performance[baskets_with_mailer] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Baskets with In-Shelf Display' = SUM ( mart_promotion_performance[baskets_with_in_shelf_display] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"

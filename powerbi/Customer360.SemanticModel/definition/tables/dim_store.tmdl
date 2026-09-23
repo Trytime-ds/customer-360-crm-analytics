@@ -1,0 +1,25 @@
+table dim_store
+	lineageTag: 76b01834-5b4d-410d-badc-dbcbc17cf509
+
+	column store_id
+		dataType: int64
+		formatString: 0
+		lineageTag: eb52cf30-4960-474d-b991-eb6f4bda4895
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_store = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    dim_store_Table = customer360_marts_Schema{[Name="dim_store",Kind="Table"]}[Data]
+				in
+				    dim_store_Table
+
+	annotation PBI_ResultType = Table
+

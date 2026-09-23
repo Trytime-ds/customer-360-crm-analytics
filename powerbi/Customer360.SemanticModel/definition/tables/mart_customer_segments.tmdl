@@ -1,0 +1,303 @@
+table mart_customer_segments
+	lineageTag: 7fe0a26c-e485-4344-b203-516e957393f7
+
+	column household_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c435f042-7536-4ce4-87de-52b3c5588641
+		summarizeBy: none
+		sourceColumn: household_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_range
+		dataType: string
+		lineageTag: 639dd937-f345-49be-a0dd-178a1913c680
+		summarizeBy: none
+		sourceColumn: age_range
+
+		annotation SummarizationSetBy = Automatic
+
+	column marital_status_code
+		dataType: string
+		lineageTag: 7cd04598-f531-40b7-942f-5054487405d1
+		summarizeBy: none
+		sourceColumn: marital_status_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column income_range
+		dataType: string
+		lineageTag: d2beaeee-b665-4777-bb25-6772449e7956
+		summarizeBy: none
+		sourceColumn: income_range
+
+		annotation SummarizationSetBy = Automatic
+
+	column homeowner_status
+		dataType: string
+		lineageTag: 10af8823-7f1e-4422-aa2e-af5fc05f1fcf
+		summarizeBy: none
+		sourceColumn: homeowner_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column household_composition
+		dataType: string
+		lineageTag: 7c14f5cb-2f80-4a5c-87a0-fa153ed27214
+		summarizeBy: none
+		sourceColumn: household_composition
+
+		annotation SummarizationSetBy = Automatic
+
+	column household_size
+		dataType: string
+		lineageTag: 4a7750fa-57e2-4352-b8a4-d3cde0613290
+		summarizeBy: none
+		sourceColumn: household_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column kid_category
+		dataType: string
+		lineageTag: 94bc41cd-fc1c-413b-9a03-e0918a2c34b1
+		summarizeBy: none
+		sourceColumn: kid_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_demographic_profile
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6a5ce4af-0f9b-44a2-a347-f1a4da390263
+		summarizeBy: none
+		sourceColumn: has_demographic_profile
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_purchase_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c854084-30e5-420e-8c89-ec53c5092798
+		summarizeBy: none
+		sourceColumn: first_purchase_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_purchase_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 41d415db-f017-4dfd-8422-015afb10acd1
+		summarizeBy: none
+		sourceColumn: last_purchase_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column recency_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 61552044-dd42-4be1-940a-7e2103601fc4
+		summarizeBy: none
+		sourceColumn: recency_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column basket_count
+		dataType: int64
+		formatString: 0
+		lineageTag: fa844c53-ad98-4806-97a0-bfab726ce48b
+		summarizeBy: none
+		sourceColumn: basket_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column monetary_value
+		dataType: double
+		lineageTag: 985539f7-3c40-4a00-9ca1-38a4b16533b1
+		summarizeBy: none
+		sourceColumn: monetary_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_order_value
+		dataType: double
+		lineageTag: cc7e281e-b801-4536-a0ac-c21453f71269
+		summarizeBy: none
+		sourceColumn: average_order_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_repeat_customer
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7a1d628a-8118-49d2-bb8c-668b274a2a54
+		summarizeBy: none
+		sourceColumn: is_repeat_customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_revenue_share
+		dataType: double
+		lineageTag: 72a2cdb5-3015-4c86-a36c-26bdbed2dadf
+		summarizeBy: none
+		sourceColumn: customer_revenue_share
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column recency_percentile
+		dataType: double
+		lineageTag: 80d40d7d-c58d-4582-8ef6-056e739953bf
+		summarizeBy: none
+		sourceColumn: recency_percentile
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column frequency_percentile
+		dataType: double
+		lineageTag: 049ed692-6089-402f-8580-4ecb1f90fe46
+		summarizeBy: none
+		sourceColumn: frequency_percentile
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monetary_percentile
+		dataType: double
+		lineageTag: 3c153fc7-b53e-44fd-af8c-4ce402196fd5
+		summarizeBy: none
+		sourceColumn: monetary_percentile
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column recency_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 6788e872-4ccf-4c05-9203-a19cdcb553c0
+		summarizeBy: none
+		sourceColumn: recency_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column frequency_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 526f10fd-3714-4b5d-8d9f-5b47ec914b92
+		summarizeBy: none
+		sourceColumn: frequency_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column monetary_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 67a2cc65-6a71-47d4-8bc8-3ff1757fcf88
+		summarizeBy: none
+		sourceColumn: monetary_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column rfm_total_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 5215b474-6ec8-4b45-89b1-5025743fd84f
+		summarizeBy: none
+		sourceColumn: rfm_total_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column rfm_code
+		dataType: string
+		lineageTag: 085aa489-3f9b-4225-b0be-c064a1e56002
+		summarizeBy: none
+		sourceColumn: rfm_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaigns_received
+		dataType: int64
+		formatString: 0
+		lineageTag: b1379909-e149-4695-a0ee-79235db6437a
+		summarizeBy: none
+		sourceColumn: campaigns_received
+
+		annotation SummarizationSetBy = Automatic
+
+	column coupon_redemption_events
+		dataType: int64
+		formatString: 0
+		lineageTag: 187af42e-a18f-4595-bf2b-0d743731dcff
+		summarizeBy: none
+		sourceColumn: coupon_redemption_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_coupons_redeemed
+		dataType: int64
+		formatString: 0
+		lineageTag: e79da88c-ab0c-4d21-97fb-d137af0c2ce2
+		summarizeBy: none
+		sourceColumn: distinct_coupons_redeemed
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaigns_with_redemption
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f2a5e4c-2c59-43dc-996d-59c17d8225d1
+		summarizeBy: none
+		sourceColumn: campaigns_with_redemption
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_campaign_history
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: da3bcb9b-6b1a-427d-bcfb-4ea61af09a70
+		summarizeBy: none
+		sourceColumn: has_campaign_history
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_coupon_redemption
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f3263278-1c13-41d9-b710-bdd2f1a15029
+		summarizeBy: none
+		sourceColumn: has_coupon_redemption
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_segment
+		dataType: string
+		lineageTag: f93db407-c0ba-486b-bb04-b666ba731d98
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mart_customer_segments = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    mart_customer_segments_Table = customer360_marts_Schema{[Name="mart_customer_segments",Kind="Table"]}[Data]
+				in
+				    mart_customer_segments_Table
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,14 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Repeat Customers' = CALCULATE ( [Customers], mart_customer_segments[is_repeat_customer] = TRUE() )
+            formatString: #,##0
+            displayFolder: "02 Customer"
+
+        measure 'Customers with Demographics' = CALCULATE ( [Customers], mart_customer_segments[has_demographic_profile] = TRUE() )
+            formatString: #,##0
+            displayFolder: "02 Customer"
+
+        measure 'Redeeming Customers' = CALCULATE ( [Customers], mart_customer_segments[has_coupon_redemption] = TRUE() )
+            formatString: #,##0
+            displayFolder: "02 Customer"

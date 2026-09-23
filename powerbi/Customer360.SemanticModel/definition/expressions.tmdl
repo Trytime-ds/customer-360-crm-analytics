@@ -1,0 +1,14 @@
+expression dim_customer =
+		let
+		    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+		    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+		    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+		    dim_customer_Table = customer360_marts_Schema{[Name="dim_customer",Kind="Table"]}[Data]
+		in
+		    dim_customer_Table
+	lineageTag: 0f925629-192b-4242-91db-66abda8b0011
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

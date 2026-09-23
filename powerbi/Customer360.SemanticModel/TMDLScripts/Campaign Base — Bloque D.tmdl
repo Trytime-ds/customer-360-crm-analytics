@@ -1,0 +1,46 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Campaigns' = DISTINCTCOUNT ( mart_campaign_performance[campaign_id] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Campaign Targeted Households' = SELECTEDVALUE ( mart_campaign_performance[targeted_households] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Campaign Reach' = SELECTEDVALUE ( mart_campaign_performance[campaign_reach] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Campaign Targeted Purchasers' = SELECTEDVALUE ( mart_campaign_performance[customers_purchasing_during_campaign] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Targeted Purchase Rate' = SELECTEDVALUE ( mart_campaign_performance[targeted_purchase_rate] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Campaign Unique Redeemers' = SELECTEDVALUE ( mart_campaign_performance[unique_redeemers] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Household Redemption Rate' = SELECTEDVALUE ( mart_campaign_performance[household_redemption_rate] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Campaign Redemption Events' = SELECTEDVALUE ( mart_campaign_performance[coupon_redemption_events] )
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Revenue During Campaign' = SELECTEDVALUE ( mart_campaign_performance[revenue_during_campaign] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Avg Spend per Targeted Purchaser' = SELECTEDVALUE ( mart_campaign_performance[average_spend_per_targeted_purchaser] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Targeted Household Revenue Share' = SELECTEDVALUE ( mart_campaign_performance[targeted_household_revenue_share_during_campaign] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"

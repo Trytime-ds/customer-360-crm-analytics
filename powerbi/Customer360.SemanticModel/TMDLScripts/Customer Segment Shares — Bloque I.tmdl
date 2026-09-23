@@ -1,0 +1,26 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Champions Customer Share' = DIVIDE ( [Champions Customers], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Champions Revenue Share' = DIVIDE ( [Champions Revenue], [Customer Revenue] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'At Risk Customer Share' = DIVIDE ( [At Risk Customers], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'At Risk Revenue Share' = DIVIDE ( [At Risk Revenue], [Customer Revenue] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Hibernating Customer Share' = DIVIDE ( [Hibernating Customers], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Hibernating Revenue Share' = DIVIDE ( [Hibernating Revenue], [Customer Revenue] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"

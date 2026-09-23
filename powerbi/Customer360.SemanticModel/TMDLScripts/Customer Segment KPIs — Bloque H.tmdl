@@ -1,0 +1,26 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Champions Customers' = CALCULATE ( [Customers], mart_customer_segments[customer_segment] = "Champions" )
+            formatString: #,##0
+            displayFolder: "02 Customer"
+
+        measure 'Champions Revenue' = CALCULATE ( [Customer Revenue], mart_customer_segments[customer_segment] = "Champions" )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"
+
+        measure 'At Risk Customers' = CALCULATE ( [Customers], mart_customer_segments[customer_segment] = "At Risk" )
+            formatString: #,##0
+            displayFolder: "02 Customer"
+
+        measure 'At Risk Revenue' = CALCULATE ( [Customer Revenue], mart_customer_segments[customer_segment] = "At Risk" )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"
+
+        measure 'Hibernating Customers' = CALCULATE ( [Customers], mart_customer_segments[customer_segment] = "Hibernating" )
+            formatString: #,##0
+            displayFolder: "02 Customer"
+
+        measure 'Hibernating Revenue' = CALCULATE ( [Customer Revenue], mart_customer_segments[customer_segment] = "Hibernating" )
+            formatString: #,##0.00
+            displayFolder: "02 Customer"

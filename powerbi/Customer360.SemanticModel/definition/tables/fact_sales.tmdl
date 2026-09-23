@@ -1,0 +1,157 @@
+table fact_sales
+	lineageTag: cc42a5fd-0749-4b2e-be8a-80871fe7b20e
+
+	column household_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 54563a83-4e2c-4689-9a58-2fb7b9eb28cc
+		summarizeBy: none
+		sourceColumn: household_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column basket_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 340067b6-b5d0-4524-b172-3a9a72521a8f
+		summarizeBy: sum
+		sourceColumn: basket_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_number
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 64ef0168-513f-4e9e-96bf-6a2252d98faf
+		summarizeBy: none
+		sourceColumn: day_number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6386eb6f-b86b-4bb0-a053-a3fb0fbfdc58
+		summarizeBy: none
+		sourceColumn: product_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 6bda058d-3f14-45fd-a81b-3ae24c6b94d3
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_value
+		dataType: double
+		lineageTag: a6cf0a6f-60a7-4251-8bbe-f02f8b5b9b01
+		summarizeBy: sum
+		sourceColumn: sales_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column store_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: efa886db-1f8d-427b-a609-40e251193042
+		summarizeBy: none
+		sourceColumn: store_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column retail_discount
+		dataType: double
+		lineageTag: d0a59870-df4d-4194-8b4e-3d02cdaf37ec
+		summarizeBy: sum
+		sourceColumn: retail_discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column transaction_time_hhmm
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f60efe3-147a-4561-8487-c71b541c4256
+		summarizeBy: sum
+		sourceColumn: transaction_time_hhmm
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: fca075e0-7804-4b23-b271-451203fe556b
+		summarizeBy: none
+		sourceColumn: transaction_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column week_number
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2a21e450-8f80-44d9-b920-d3149e169515
+		summarizeBy: sum
+		sourceColumn: week_number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column coupon_discount
+		dataType: double
+		lineageTag: 89275e66-0378-4b61-9bb5-61b7c9b9b39b
+		summarizeBy: sum
+		sourceColumn: coupon_discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coupon_match_discount
+		dataType: double
+		lineageTag: b801b9d3-45f6-48ab-a41a-28fac3a12a71
+		summarizeBy: sum
+		sourceColumn: coupon_match_discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_sales = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    fact_sales_Table = customer360_marts_Schema{[Name="fact_sales",Kind="Table"]}[Data]
+				in
+				    fact_sales_Table
+
+	annotation PBI_ResultType = Table
+

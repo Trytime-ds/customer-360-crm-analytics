@@ -1,0 +1,16 @@
+relationship AutoDetected_51ad43a2-30e6-44ba-ad71-c740b6ac1fea
+	fromColumn: fact_sales.product_id
+	toColumn: dim_product.product_id
+
+relationship AutoDetected_5bc2ce54-f867-4065-9490-4b338dd627e3
+	fromColumn: fact_sales.store_id
+	toColumn: dim_store.store_id
+
+relationship AutoDetected_320fd565-fa72-452b-84cd-a4d89f871396
+	fromColumn: fact_sales.day_number
+	toColumn: dim_relative_time.day_number
+
+relationship AutoDetected_66b27041-4b20-455d-aca7-162bcc58bca8
+	fromColumn: fact_sales.household_id
+	toColumn: mart_customer_segments.household_id
+

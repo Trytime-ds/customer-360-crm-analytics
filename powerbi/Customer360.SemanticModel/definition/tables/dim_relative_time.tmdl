@@ -1,0 +1,34 @@
+table dim_relative_time
+	lineageTag: 841391ff-142c-40c5-ade4-2d1857319dfd
+
+	column day_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 43752ac1-c990-443f-8a52-9f6814c2ce3d
+		summarizeBy: none
+		sourceColumn: day_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_number
+		dataType: int64
+		formatString: 0
+		lineageTag: d2c3c324-e292-4d08-8b83-2820be69cae9
+		summarizeBy: none
+		sourceColumn: week_number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_relative_time = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    dim_relative_time_Table = customer360_marts_Schema{[Name="dim_relative_time",Kind="Table"]}[Data]
+				in
+				    dim_relative_time_Table
+
+	annotation PBI_ResultType = Table
+

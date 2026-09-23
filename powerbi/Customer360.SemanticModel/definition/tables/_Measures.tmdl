@@ -1,0 +1,355 @@
+table _Measures
+	isHidden
+	lineageTag: b2c94dfe-3fb1-476f-ae33-7948d184fd09
+
+	measure 'Total Revenue' = SUM ( fact_sales[sales_value] )
+		formatString: #,##0.00
+		displayFolder: 01 Executive
+		lineageTag: 1ab6189b-a540-4dbd-8bbe-48c3e31c948a
+
+	measure Baskets = DISTINCTCOUNT ( fact_sales[basket_id] )
+		formatString: #,##0
+		displayFolder: 01 Executive
+		lineageTag: bb6b2915-d0d0-47e6-9d60-c79dcb39c43f
+
+	measure 'Active Customers' = DISTINCTCOUNT ( fact_sales[household_id] )
+		formatString: #,##0
+		displayFolder: 01 Executive
+		lineageTag: 4d24dd61-f6dd-44fa-95fd-bc57a86aeddc
+
+	measure 'Average Order Value' = DIVIDE ( [Total Revenue], [Baskets] )
+		formatString: #,##0.00
+		displayFolder: 01 Executive
+		lineageTag: f6d69ceb-a92d-4aaf-9a39-9985cc8cee01
+
+	measure 'Purchase Frequency' = DIVIDE ( [Baskets], [Active Customers] )
+		formatString: #,##0.00
+		displayFolder: 01 Executive
+		lineageTag: 940a880a-7320-4f52-acf4-8ea97c25063f
+
+	measure 'Revenue per Customer' = DIVIDE ( [Total Revenue], [Active Customers] )
+		formatString: #,##0.00
+		displayFolder: 01 Executive
+		lineageTag: e8667c38-6bda-45da-8bfc-ce7abf1b5a88
+
+	measure Customers = DISTINCTCOUNT ( mart_customer_segments[household_id] )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: 6d8379bd-d041-4624-87ac-8551582f08e9
+
+	measure 'Customer Revenue' = SUM ( mart_customer_segments[monetary_value] )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: 287a8f14-029b-4123-9d71-8cb368431fba
+
+	measure 'Average Recency Days' = AVERAGE ( mart_customer_segments[recency_days] )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: d3b6a605-59b6-494e-af4a-df966657dad6
+
+	measure 'Average Customer Baskets' = AVERAGE ( mart_customer_segments[basket_count] )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: ed942ece-07f4-429d-80ea-1c38dddfcf17
+
+	measure 'Average Customer Revenue' = AVERAGE ( mart_customer_segments[monetary_value] )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: dfac5805-28b1-44a5-80be-c580ae55657d
+
+	measure 'Repeat Customers' = CALCULATE ( [Customers], mart_customer_segments[is_repeat_customer] = TRUE() )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: 59621cc4-22dc-4386-be1f-454573498ae1
+
+	measure 'Customers with Demographics' = CALCULATE ( [Customers], mart_customer_segments[has_demographic_profile] = TRUE() )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: a78b8550-facc-428b-b33f-b7b8181c61b1
+
+	measure 'Redeeming Customers' = CALCULATE ( [Customers], mart_customer_segments[has_coupon_redemption] = TRUE() )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: 2a26f110-eeda-45f4-b615-a7f7159da864
+
+	measure 'Repeat Customer Rate' = DIVIDE ( [Repeat Customers], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 772ffacf-8b35-49a8-9e04-f84b782d9e2c
+
+	measure 'Demographic Coverage' = DIVIDE ( [Customers with Demographics], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 9b2f36df-44d2-4729-8fe6-cdcce4bb1a89
+
+	measure 'Redeeming Customer Rate' = DIVIDE ( [Redeeming Customers], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 9946a2b0-9b80-47bf-8df4-467e13d712fc
+
+	measure 'Segment Customer Share' = DIVIDE ( [Customers], CALCULATE ( [Customers], REMOVEFILTERS ( mart_customer_segments[customer_segment] ) ) )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: f1b1bb8f-c862-42b6-8143-177f9d43b0f1
+
+	measure 'Segment Revenue Share' = DIVIDE ( [Customer Revenue], CALCULATE ( [Customer Revenue], REMOVEFILTERS ( mart_customer_segments[customer_segment] ) ) )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 60ce92d2-c044-475a-bc09-cf51e490934e
+
+	measure Campaigns = DISTINCTCOUNT ( mart_campaign_performance[campaign_id] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 8d7e8046-b760-423f-b2ce-0076d14cdcf6
+
+	measure 'Campaign Targeted Households' = SELECTEDVALUE ( mart_campaign_performance[targeted_households] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 1a6555fc-5b47-4940-b72a-5ea873c52e13
+
+	measure 'Campaign Reach' = SELECTEDVALUE ( mart_campaign_performance[campaign_reach] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 08ed1ed6-6e0a-4e80-93c2-87e59e91e2ed
+
+	measure 'Campaign Targeted Purchasers' = SELECTEDVALUE ( mart_campaign_performance[customers_purchasing_during_campaign] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: c40101b9-ab39-4166-a86a-7234ae78ade1
+
+	measure 'Targeted Purchase Rate' = SELECTEDVALUE ( mart_campaign_performance[targeted_purchase_rate] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: edd333b8-633f-49f1-9fde-04ebfa4f4e80
+
+	measure 'Campaign Unique Redeemers' = SELECTEDVALUE ( mart_campaign_performance[unique_redeemers] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 6c4af4a7-bb10-4dc7-a45f-dbbbdc1ac4e7
+
+	measure 'Household Redemption Rate' = SELECTEDVALUE ( mart_campaign_performance[household_redemption_rate] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 4b97dee5-37ca-4469-955a-7911570f1364
+
+	measure 'Campaign Redemption Events' = SELECTEDVALUE ( mart_campaign_performance[coupon_redemption_events] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 81b0d1e8-2180-46c9-9a50-34a39b6fdeef
+
+	measure 'Revenue During Campaign' = SELECTEDVALUE ( mart_campaign_performance[revenue_during_campaign] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: cd27b30d-ff0b-4851-a6bc-460ed0fdd432
+
+	measure 'Avg Spend per Targeted Purchaser' = SELECTEDVALUE ( mart_campaign_performance[average_spend_per_targeted_purchaser] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: d9675dc1-06ca-469b-bd02-5ab7d4c94bd0
+
+	measure 'Targeted Household Revenue Share' = SELECTEDVALUE ( mart_campaign_performance[targeted_household_revenue_share_during_campaign] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: f590017e-8922-41d5-8449-d84487bc1fea
+
+	measure 'Fully Observed Campaigns' = CALCULATE ( [Campaigns], mart_campaign_performance[is_fully_observed] = TRUE() )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 87d728e3-ed65-4df3-bcba-1ff03ba34154
+
+	measure 'Partially Observed Campaigns' = CALCULATE ( [Campaigns], mart_campaign_performance[is_fully_observed] = FALSE() )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: a18b8427-8da6-4ced-b048-4d6abbe5aee1
+
+	measure 'Average Campaign Reach' = AVERAGE ( mart_campaign_performance[campaign_reach] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 97e79aee-c527-4abd-8ca5-c2fb98a61c8f
+
+	measure 'Assignment-Weighted Targeted Purchase Rate' = DIVIDE ( SUM ( mart_campaign_performance[customers_purchasing_during_campaign] ), SUM ( mart_campaign_performance[targeted_households] ) )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: ad41dd7c-0026-4f71-b3a1-eb1883abf2b4
+
+	measure 'Assignment-Weighted Redemption Rate' = DIVIDE ( SUM ( mart_campaign_performance[unique_redeemers] ), SUM ( mart_campaign_performance[targeted_households] ) )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 4eee58ad-cbbf-4427-a8c1-2922113c3ab0
+
+	measure 'Total Campaign Redemption Events' = SUM ( mart_campaign_performance[coupon_redemption_events] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 1fac4cb5-6e7f-4a19-b0fb-77a95aec3263
+
+	measure 'Promotion Weeks' = DISTINCTCOUNT ( mart_promotion_performance[week_number] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 6d0fa09c-1283-4dfc-a12d-af316d628810
+
+	measure 'Promotion Window Baskets' = SUM ( mart_promotion_performance[total_baskets] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: e917cb49-f523-42e3-be45-535339d4d8e7
+
+	measure 'Promotional Baskets' = SUM ( mart_promotion_performance[promotional_baskets] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 44b3247e-f0fd-4f61-936f-a5229a1fc2d4
+
+	measure 'Promotion Window Revenue' = SUM ( mart_promotion_performance[total_revenue] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 3029850b-5839-46cc-a76b-6647cf244ed0
+
+	measure 'Promotional Revenue' = SUM ( mart_promotion_performance[promotional_revenue] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: e6c1350a-743d-4d64-8d22-6498ca1ee00c
+
+	measure 'Revenue under Special Display' = SUM ( mart_promotion_performance[revenue_under_special_display] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: dc70024b-43b6-425a-8a95-be64770566fd
+
+	measure 'Revenue under Mailer' = SUM ( mart_promotion_performance[revenue_under_mailer] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: b2d015e8-c6b7-4d95-8579-4277c6168911
+
+	measure 'Revenue under In-Shelf Display' = SUM ( mart_promotion_performance[revenue_under_in_shelf_display] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 0ec1e19a-88e6-42b6-8dc9-14d7fa272189
+
+	measure 'Baskets with Special Display' = SUM ( mart_promotion_performance[baskets_with_special_display] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: c395f4bb-c91a-4b98-a46d-73d5c15abd68
+
+	measure 'Baskets with Mailer' = SUM ( mart_promotion_performance[baskets_with_mailer] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 9882dce2-ba5b-447c-95f8-10271a58153a
+
+	measure 'Baskets with In-Shelf Display' = SUM ( mart_promotion_performance[baskets_with_in_shelf_display] )
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: fa5e2b8f-577f-4623-9dda-7c19d717ec2e
+
+	measure 'Promotional Basket Rate' = DIVIDE ( [Promotional Baskets], [Promotion Window Baskets] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: f1bc9ae4-a408-4a9b-9561-5a999dc790cb
+
+	measure 'Promotional Revenue Share' = DIVIDE ( [Promotional Revenue], [Promotion Window Revenue] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 21eab965-9904-4fbf-8bf4-5550f355ad2b
+
+	measure 'Special Display Basket Rate' = DIVIDE ( [Baskets with Special Display], [Promotion Window Baskets] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 23517a7a-1f72-49f7-ad9b-90f6cf882f52
+
+	measure 'Mailer Basket Rate' = DIVIDE ( [Baskets with Mailer], [Promotion Window Baskets] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 8a9dfb04-712d-4325-a718-ee86e4bd5257
+
+	measure 'In-Shelf Basket Rate' = DIVIDE ( [Baskets with In-Shelf Display], [Promotion Window Baskets] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 3a47ca0d-31d5-4523-b4bd-725b30c31dcf
+
+	measure 'Special Display Revenue Share' = DIVIDE ( [Revenue under Special Display], [Promotion Window Revenue] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 6ca7a538-e792-4f75-8d63-e02ee350deea
+
+	measure 'Mailer Revenue Share' = DIVIDE ( [Revenue under Mailer], [Promotion Window Revenue] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: df25eff2-298d-4206-a024-16c28ae99325
+
+	measure 'In-Shelf Revenue Share' = DIVIDE ( [Revenue under In-Shelf Display], [Promotion Window Revenue] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 9ec3a1e0-f57b-4f55-91df-ca167d478d8e
+
+	measure 'Champions Customers' = CALCULATE ( [Customers], mart_customer_segments[customer_segment] = "Champions" )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: edfce23c-3a48-44fb-acc1-b05f0c5fd80e
+
+	measure 'Champions Revenue' = CALCULATE ( [Customer Revenue], mart_customer_segments[customer_segment] = "Champions" )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: 89c33833-405e-4cba-b915-4f93710e6358
+
+	measure 'At Risk Customers' = CALCULATE ( [Customers], mart_customer_segments[customer_segment] = "At Risk" )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: 8b67da07-9f2c-4353-9439-a8b93a0f7882
+
+	measure 'At Risk Revenue' = CALCULATE ( [Customer Revenue], mart_customer_segments[customer_segment] = "At Risk" )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: 220038f6-83fd-4b47-979c-9a414d43055c
+
+	measure 'Hibernating Customers' = CALCULATE ( [Customers], mart_customer_segments[customer_segment] = "Hibernating" )
+		formatString: #,##0
+		displayFolder: 02 Customer
+		lineageTag: 173ef01e-c857-49a3-82eb-c2cc5c19aecb
+
+	measure 'Hibernating Revenue' = CALCULATE ( [Customer Revenue], mart_customer_segments[customer_segment] = "Hibernating" )
+		formatString: #,##0.00
+		displayFolder: 02 Customer
+		lineageTag: f2b2dff6-3805-483b-a8eb-4fb99f74bbf2
+
+	measure 'Champions Customer Share' = DIVIDE ( [Champions Customers], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: b761e60e-d7f1-4704-ab7b-834e4efbfb35
+
+	measure 'Champions Revenue Share' = DIVIDE ( [Champions Revenue], [Customer Revenue] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 6c946898-df61-4d91-bb7d-9b8470aea807
+
+	measure 'At Risk Customer Share' = DIVIDE ( [At Risk Customers], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 146ff51c-9531-4257-aa90-187d4417a5fd
+
+	measure 'At Risk Revenue Share' = DIVIDE ( [At Risk Revenue], [Customer Revenue] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: e35e46d3-b792-436e-8f80-b0309f6b2f6a
+
+	measure 'Hibernating Customer Share' = DIVIDE ( [Hibernating Customers], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: d3ba7a2e-4c44-4082-8ea9-daa239b02631
+
+	measure 'Hibernating Revenue Share' = DIVIDE ( [Hibernating Revenue], [Customer Revenue] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: b2010018-7fba-4260-a28c-e8286bf98eb4
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: 7a6d5f42-81eb-49a3-b46f-bc82c0373313
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = { BLANK() }
+
+	annotation PBI_Id = ecb98bbb8d4e47e1961460650fe8a1b9
+

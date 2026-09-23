@@ -1,0 +1,34 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Promotional Basket Rate' = DIVIDE ( [Promotional Baskets], [Promotion Window Baskets] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotional Revenue Share' = DIVIDE ( [Promotional Revenue], [Promotion Window Revenue] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Special Display Basket Rate' = DIVIDE ( [Baskets with Special Display], [Promotion Window Baskets] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Mailer Basket Rate' = DIVIDE ( [Baskets with Mailer], [Promotion Window Baskets] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'In-Shelf Basket Rate' = DIVIDE ( [Baskets with In-Shelf Display], [Promotion Window Baskets] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Special Display Revenue Share' = DIVIDE ( [Revenue under Special Display], [Promotion Window Revenue] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Mailer Revenue Share' = DIVIDE ( [Revenue under Mailer], [Promotion Window Revenue] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'In-Shelf Revenue Share' = DIVIDE ( [Revenue under In-Shelf Display], [Promotion Window Revenue] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"

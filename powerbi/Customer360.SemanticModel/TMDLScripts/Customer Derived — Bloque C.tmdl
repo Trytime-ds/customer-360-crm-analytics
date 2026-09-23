@@ -1,0 +1,22 @@
+createOrReplace
+    ref table '_Measures'
+
+        measure 'Repeat Customer Rate' = DIVIDE ( [Repeat Customers], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Demographic Coverage' = DIVIDE ( [Customers with Demographics], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Redeeming Customer Rate' = DIVIDE ( [Redeeming Customers], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Segment Customer Share' = DIVIDE ( [Customers], CALCULATE ( [Customers], REMOVEFILTERS ( mart_customer_segments[customer_segment] ) ) )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Segment Revenue Share' = DIVIDE ( [Customer Revenue], CALCULATE ( [Customer Revenue], REMOVEFILTERS ( mart_customer_segments[customer_segment] ) ) )
+            formatString: 0.00%
+            displayFolder: "02 Customer"

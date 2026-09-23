@@ -1,0 +1,188 @@
+table mart_campaign_performance
+	lineageTag: c52da629-d8fc-48ca-867f-2a17ecad16ea
+
+	column campaign_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3807743e-beb8-45dc-8006-8b7aed715348
+		summarizeBy: sum
+		sourceColumn: campaign_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_type
+		dataType: string
+		lineageTag: db7182f1-77b4-470d-a180-cbe31aa2c575
+		summarizeBy: none
+		sourceColumn: campaign_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_day_number
+		dataType: int64
+		formatString: 0
+		lineageTag: fdb00e98-ac1b-4e78-836b-c3894f57f2b8
+		summarizeBy: sum
+		sourceColumn: start_day_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column observed_end_day_number
+		dataType: int64
+		formatString: 0
+		lineageTag: e4b7daac-76cb-489f-810b-268aa2ffacfe
+		summarizeBy: sum
+		sourceColumn: observed_end_day_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_fully_observed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8bf81770-be13-41f1-a59f-ab584fed269e
+		summarizeBy: none
+		sourceColumn: is_fully_observed
+
+		annotation SummarizationSetBy = Automatic
+
+	column targeted_households
+		dataType: int64
+		formatString: 0
+		lineageTag: 50469894-c5d6-4ba7-a89f-0ef1cebc45e0
+		summarizeBy: sum
+		sourceColumn: targeted_households
+
+		annotation SummarizationSetBy = Automatic
+
+	column campaign_reach
+		dataType: double
+		lineageTag: 77ba9bc1-4b79-4f80-bd98-e4e75cb97447
+		summarizeBy: sum
+		sourceColumn: campaign_reach
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column customers_purchasing_during_campaign
+		dataType: int64
+		formatString: 0
+		lineageTag: b643605a-ad75-4992-8b2b-1f26b63ddd71
+		summarizeBy: sum
+		sourceColumn: customers_purchasing_during_campaign
+
+		annotation SummarizationSetBy = Automatic
+
+	column targeted_purchase_rate
+		dataType: double
+		lineageTag: 64c1ecb8-0d61-490e-a482-7ee6a6068794
+		summarizeBy: sum
+		sourceColumn: targeted_purchase_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_during_campaign
+		dataType: double
+		lineageTag: 507adadb-9f68-416b-8dbc-c80a4aec53f2
+		summarizeBy: sum
+		sourceColumn: revenue_during_campaign
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_spend_during_campaign
+		dataType: double
+		lineageTag: 9b640ad7-dee6-47c2-81dd-a15cd1992f76
+		summarizeBy: sum
+		sourceColumn: average_spend_during_campaign
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_spend_per_targeted_purchaser
+		dataType: double
+		lineageTag: fc445045-4b1a-4440-951c-bb89c25ae8bb
+		summarizeBy: sum
+		sourceColumn: average_spend_per_targeted_purchaser
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unique_redeemers
+		dataType: int64
+		formatString: 0
+		lineageTag: 82cb6de4-e992-4530-ac15-2c8de40c3482
+		summarizeBy: sum
+		sourceColumn: unique_redeemers
+
+		annotation SummarizationSetBy = Automatic
+
+	column coupon_redemption_events
+		dataType: int64
+		formatString: 0
+		lineageTag: 6880645a-c3a9-4c86-9f67-606bd86d06aa
+		summarizeBy: sum
+		sourceColumn: coupon_redemption_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column household_redemption_rate
+		dataType: double
+		lineageTag: d21766df-ee6b-4b00-8853-ab4f53e5862f
+		summarizeBy: sum
+		sourceColumn: household_redemption_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column average_spend_per_redeemer
+		dataType: double
+		lineageTag: 1598970b-c4c7-4ec7-87d8-b3602b8f5063
+		summarizeBy: sum
+		sourceColumn: average_spend_per_redeemer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column all_customer_revenue_during_campaign
+		dataType: double
+		lineageTag: cc59f94f-b8b0-4ee3-921e-ad596b8a1a05
+		summarizeBy: sum
+		sourceColumn: all_customer_revenue_during_campaign
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column targeted_household_revenue_share_during_campaign
+		dataType: double
+		lineageTag: 9a2b6e7a-ceaa-47e0-a87a-ddb65faa7c43
+		summarizeBy: sum
+		sourceColumn: targeted_household_revenue_share_during_campaign
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition mart_campaign_performance = m
+		mode: import
+		source =
+				let
+				    Origen = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"project-7f6a0637-98f8-45a2-a89_Database" = Origen{[Name="project-7f6a0637-98f8-45a2-a89",Kind="Database"]}[Data],
+				    customer360_marts_Schema = #"project-7f6a0637-98f8-45a2-a89_Database"{[Name="customer360_marts",Kind="Schema"]}[Data],
+				    mart_campaign_performance_Table = customer360_marts_Schema{[Name="mart_campaign_performance",Kind="Table"]}[Data]
+				in
+				    mart_campaign_performance_Table
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
