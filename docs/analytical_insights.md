@@ -8,10 +8,10 @@ The goal of this phase was deliberately different from dashboard building: first
 
 The analysis produced four primary findings:
 
-1. **Customer value is highly concentrated.** Champions and Loyal Customers represent **31.48% of customers but 61.01% of historical revenue**.
-2. **Purchase frequency is the strongest observed differentiator of customer value.** Champions have much higher purchase frequency while their average basket value is not the highest among segments.
-3. **The current At Risk segment contains meaningful historical value.** These customers represent **18.56% of the customer base and 18.15% of historical revenue**, while showing lower recent activity than the overall customer universe.
-4. **Campaign redemption and promotional-basket behavior contain more useful CRM signals than purchase-during-campaign rates.** Campaign redemption varies materially, and baskets containing promotions are substantially larger even though most of their revenue comes from non-promotional lines.
+1. **Customer value is highly concentrated and primarily differentiated by purchase frequency.** Champions and Loyal Customers represent **31.48% of customers but 61.01% of historical revenue**; Champions combine very high purchase frequency with an AOV that is not the highest among segments.
+2. **The current At Risk segment contains meaningful historical value with lower recent activity.** These customers represent **18.56% of the customer base and 18.15% of historical revenue**, making them relevant for retention / reactivation analysis while end-of-dataset behavior remains a coverage caveat.
+3. **Household redemption is more discriminating than purchase-during-campaign.** TypeA shows higher observed redemption, but audience size is also associated with redemption, so campaign type cannot be isolated as the explanation.
+4. **Promotions are frequently present in high-value baskets but account for a minority of their revenue.** Promotional baskets average **2.76x** the value of non-promotional baskets, while promotional lines represent only **25.28%** of revenue inside those baskets.
 
 The analysis is descriptive. It does **not** estimate causal campaign lift, incremental revenue or promotion-driven basket expansion.
 
@@ -29,23 +29,23 @@ The large revenue difference between Champions and other segments may be driven 
 
 ### Analytical Approach
 
-Customer-level metrics from \`mart_customer_segments\` were aggregated by segment.
+Customer-level metrics from `mart_customer_segments` were aggregated by segment.
 
 Segment AOV was calculated as:
 
-\`\`\`text
+```text
 segment revenue / segment baskets
-\`\`\`
+```
 
 rather than averaging customer-level AOVs. This preserves the relationship:
 
-\`\`\`text
+```text
 Revenue per Customer
 =
 Baskets per Customer
 x
 Revenue per Basket
-\`\`\`
+```
 
 ### Evidence
 
@@ -196,9 +196,9 @@ Campaign-level household redemption rates were compared across the 30 campaigns.
 
 Type-level results were calculated only on fully observed campaigns and used assignment-weighted rates:
 
-\`\`\`text
+```text
 total redeemers / total targeted assignments
-\`\`\`
+```
 
 This avoids giving a 12-household campaign the same weight as a campaign targeting more than 1,000 households.
 
@@ -302,10 +302,10 @@ Promotional baskets are therefore associated with an average basket value **2.76
 
 Inside promotional baskets, approximately:
 
-\`\`\`text
+```text
 25.28%  promotional-line revenue
 74.72%  non-promotional-line revenue
-\`\`\`
+```
 
 ### Validation / Challenge
 
@@ -354,9 +354,9 @@ Most major department affinity indexes remain close to **1.00**.
 
 Notable but secondary deviations include:
 
-- Champions over-index in \`KIOSK-GAS\` (**1.27**) and \`MISC SALES TRAN\` (**1.42**).
-- At Risk moderately over-index in \`MEAT\` (**1.12**) and \`MEAT-PCKGD\` (**1.13**).
-- Loyal Customers moderately over-index in \`NUTRITION\` (**1.18**).
+- Champions over-index in `KIOSK-GAS` (**1.27**) and `MISC SALES TRAN` (**1.42**).
+- At Risk moderately over-index in `MEAT` (**1.12**) and `MEAT-PCKGD` (**1.13**).
+- Loyal Customers moderately over-index in `NUTRITION` (**1.18**).
 
 These differences are not large enough to explain the much larger gap in revenue/customer across value segments.
 
@@ -423,13 +423,13 @@ Focus on:
 
 All primary analytical queries are versioned under:
 
-\`\`\`text
+```text
 sql/analysis/
 ├── 01_customer_value_concentration.sql
 ├── 02_at_risk_activity.sql
 ├── 03_customer_department_affinity.sql
 ├── 04_campaign_redemption_analysis.sql
 └── 05_promotional_basket_behavior.sql
-\`\`\`
+```
 
 These queries operate on validated dbt marts and intermediate models rather than reconstructing business logic from raw source tables.
