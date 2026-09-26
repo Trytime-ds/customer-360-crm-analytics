@@ -1,232 +1,342 @@
 # Customer 360 & CRM Campaign Analytics
 
-End-to-end Data Analytics and Business Intelligence portfolio project focused on customer behavior, CRM campaigns, segmentation, promotions and commercial performance.
+End-to-end Data Analytics and Business Intelligence portfolio project focused on customer behavior, CRM segmentation, campaign response and promotional activity.
 
-The project uses the dunnhumby **The Complete Journey** dataset to build a reproducible analytical workflow from raw transactional data to business-ready analytical marts and Power BI dashboards.
+The project uses the dunnhumby **The Complete Journey** dataset to build a reproducible workflow from raw retail transactions to validated analytical marts, documented business insights and a Power BI decision-support dashboard.
+
+> **Current stage:** analytical insights documented; dashboard blueprint and final Power BI visual design in progress.
 
 ---
 
-## Project Objectives
+## Business Problem
 
-The project aims to build a Customer 360 analytical layer capable of supporting:
+How can a retailer use transactional and CRM data to:
 
-- customer behavior analysis;
-- customer segmentation;
-- RFM analysis;
-- sales performance analysis;
-- descriptive CRM campaign analytics;
-- coupon redemption analysis;
-- promotion performance analysis;
-- business intelligence reporting.
+- identify where customer value is concentrated;
+- understand what differentiates high-value customer segments;
+- detect customer groups worth monitoring for retention / reactivation;
+- evaluate observable campaign-response behavior;
+- understand how promotions participate in customer baskets;
+- communicate those findings through a business-ready BI product?
 
-The project focuses on **descriptive and observable analytics**. Causal or incremental campaign impact is outside the MVP unless the available data supports a defensible methodology.
+The MVP is intentionally **descriptive and observable**. It does not present campaign lift, incremental revenue or promotion-driven basket expansion without a defensible causal design.
+
+---
+
+## Key Findings
+
+### 1. Customer value is highly concentrated
+
+**Champions + Loyal Customers represent 31.48% of customers but generate 61.01% of historical revenue.**
+
+Champions alone represent:
+
+- **20.08% of customers**
+- **44.97% of revenue**
+- value concentration index: **2.24**
+
+### 2. Purchase frequency is the strongest observed value differentiator
+
+Champions generate **7,217.66 revenue/customer** with **246.87 baskets/customer**, despite an AOV of **29.24**.
+
+Other segments have equal or higher basket values:
+
+- At Risk AOV: **30.81**
+- Potential Loyalists AOV: **33.79**
+
+The largest economic gap is therefore associated more strongly with **shopping frequency / intensity** than with basket size.
+
+### 3. At Risk customers retain meaningful historical value
+
+The current At Risk segment contains:
+
+- **464 customers**
+- **18.56% of the customer base**
+- **18.15% of historical revenue**
+- **3,151.79 revenue/customer**
+
+Their recent activity is lower than the overall customer universe, making the group relevant for retention / reactivation analysis. End-of-dataset behavior is treated cautiously because the final period requires coverage validation.
+
+### 4. Campaign redemption is more discriminating than purchase-during-campaign
+
+Targeted purchase rates are almost saturated across campaigns, while household redemption varies materially.
+
+Among fully observed campaigns:
+
+| Campaign Type | Weighted Household Redemption |
+|---|---:|
+| TypeA | **15.96%** |
+| TypeB | **7.95%** |
+| TypeC | **7.67%** |
+
+However, audience size is also positively associated with redemption (\`r = 0.604\`), so campaign type cannot be isolated as the causal explanation.
+
+### 5. Promotional baskets are much larger, but most of their value is not promotional
+
+- **55.66%** of baskets contain at least one promotional line.
+- Those baskets account for **77.61%** of revenue in the promotion-analysis window.
+- Average promotional basket value: **40.62**
+- Average non-promotional basket value: **14.72**
+- Basket value ratio: **2.76x**
+- Only **25.28%** of revenue inside promotional baskets comes from promotional lines.
+
+This is an association, not evidence that promotions caused larger baskets.
+
+**[Read the full analytical case study →](docs/analytical_insights.md)**
+
+---
+
+## Analytical Workflow
+
+The dashboard is designed **after** the analytical exploration, not before it.
+
+\`\`\`text
+CSV source files
+        ↓
+Google Cloud Storage
+        ↓
+BigQuery RAW dataset
+        ↓
+dbt staging
+        ↓
+intermediate business logic
+        ↓
+dimensions / facts / analytical marts
+        ↓
+analytical QA
+        ↓
+SQL analytical exploration
+        ↓
+validated findings + limitations
+        ↓
+Power BI semantic model + DAX
+        ↓
+3-page decision-support dashboard
+\`\`\`
+
+This workflow separates:
+
+- data engineering / transformation;
+- analytical modeling;
+- exploratory business analysis;
+- insight validation;
+- BI communication.
 
 ---
 
 ## Technology Stack
 
-- SQL
-- Google BigQuery
-- dbt Core
-- Power BI
-- DAX
-- Python (complementary analysis / validation)
-- Git
-- GitHub
+- **SQL**
+- **Google BigQuery**
+- **dbt Core**
+- **Power BI**
+- **DAX**
+- **Git**
+- **GitHub**
+
+Python remains a post-MVP / complementary option rather than a dependency of the current BI-first workflow.
 
 ---
 
-## High-Level Architecture
+## Data Model & Analytical Layer
 
-```text
-Kaggle / dunnhumby CSV
-        ↓
-Google Cloud Storage
-        ↓
-BigQuery
-customer360 [RAW / SOURCE]
-        ↓
-dbt
-        ↓
-staging
-        ↓
-intermediate
-        ↓
-dimensions / facts / analytical marts
-        ↓
-Power BI / DAX
-        ↓
-Insights & Recommendations
+The transformation pipeline includes:
 
-Python is used selectively for complementary validation or analysis.
-```
+### Staging
 
-## Repository Structure
+- \`stg_transactions\`
+- \`stg_products\`
+- \`stg_household_demographics\`
+- \`stg_campaigns\`
+- \`stg_campaign_assignments\`
+- \`stg_coupons\`
+- \`stg_coupon_redemptions\`
+- \`stg_promotions\`
 
-```text
-dbt/          dbt transformation pipeline
-sql/          exploratory, validation and analytical SQL
-notebooks/    complementary Python analysis
-powerbi/      Power BI assets
-docs/         public project documentation
-images/       architecture, model and dashboard images
-```
+### Intermediate
 
-## Current Project Status
+- \`int_customer_metrics\`
+- \`int_customer_rfm\`
+- \`int_product_store_week_promotions\`
+- \`int_campaign_household_activity\`
+- \`int_transaction_promotions\`
+- \`int_basket_promotion_summary\`
 
-| Phase | Status |
-|---|---|
-| Phase 00 — Project Definition | ✅ Complete |
-| Phase 01 — Repository & Environment | ✅ Complete |
-| Phase 02 — Source Inspection & Profiling | ✅ Complete |
-| Phase 03 — Raw Ingestion | ✅ Complete |
-| Phase 04 — Data Quality | ✅ Complete |
-| Phase 05 — Staging & dbt | ✅ Complete |
-| Phase 06 — Dimensional Modeling | 🟢 Core models complete; ERD/docs pending |
-| Phase 07 — Analytical Marts | ✅ Core marts + analytical QA complete |
-| Phase 08 — Python Analytics | ⏳ Complementary / deferred |
-| Phase 09 — Power BI | 🚧 Current focus |
-| Phase 10 — Insights & Recommendations | ⏳ Pending |
-| Phase 11 — Portfolio Packaging | ⏳ Pending |
+### Dimensions
 
-### dbt milestone
+- \`dim_customer\`
+- \`dim_product\`
+- \`dim_campaign\`
+- \`dim_store\`
+- \`dim_relative_time\`
 
-The transformation pipeline now includes:
+### Facts
 
-**Staging**
-- `stg_transactions`
-- `stg_products`
-- `stg_household_demographics`
-- `stg_campaigns`
-- `stg_campaign_assignments`
-- `stg_coupons`
-- `stg_coupon_redemptions`
-- `stg_promotions`
+- \`fact_sales\`
+- \`fact_campaign_received\`
+- \`fact_coupon_redemption\`
+- \`fact_promotions\`
 
-**Intermediate**
-- `int_customer_metrics`
-- `int_customer_rfm`
-- `int_product_store_week_promotions`
-- `int_campaign_household_activity`
-- `int_transaction_promotions`
-- `int_basket_promotion_summary`
+### Analytical Marts
 
-**Dimensions**
-- `dim_customer`
-- `dim_product`
-- `dim_campaign`
-- `dim_store`
-- `dim_relative_time`
+- \`mart_customer_360\`
+- \`mart_customer_segments\`
+- \`mart_campaign_performance\`
+- \`mart_promotion_performance\`
 
-**Facts**
-- `fact_sales`
-- `fact_campaign_received`
-- `fact_coupon_redemption`
-- `fact_promotions`
+A full dbt project build completed with:
 
-**Analytical marts**
-- `mart_customer_360`
-- `mart_customer_segments`
-- `mart_campaign_performance`
-- `mart_promotion_performance`
-
-A full project `dbt build` completed successfully with:
-
-```text
+\`\`\`text
 PASS=243
 WARN=0
 ERROR=0
 SKIP=0
-```
+\`\`\`
 
-### Analytical design principles
+---
 
-- Customer 360 / RFM uses the full transactional horizon `DAY 1–711`, with snapshot `DAY 711`.
-- Campaign analysis uses effective campaign windows capped at `DAY 711`.
-- Campaign KPIs are descriptive and observable; purchase during a campaign is not presented as campaign-caused conversion.
-- Promotion analytics uses the safe `product_id + store_id + week_number` grain.
-- `display='A'` is preserved as **In-Shelf** and is not treated as special display.
-- Advanced causal lift, incrementality, CLV and Machine Learning remain outside the BI-first MVP.
+## Reproducible Analytical Evidence
 
-### Current focus
+Portfolio-facing analytical SQL is versioned separately from profiling and QA:
 
-```text
-Power BI semantic model
-        ↓
-DAX measures
-        ↓
-3-page dashboard
-        ↓
-Insights & Recommendations
-        ↓
-Portfolio Packaging
-```
+\`\`\`text
+sql/
+├── qa/
+│   └── analytical_qa.sql
+└── analysis/
+    ├── 01_customer_value_concentration.sql
+    ├── 02_at_risk_activity.sql
+    ├── 03_customer_department_affinity.sql
+    ├── 04_campaign_redemption_analysis.sql
+    └── 05_promotional_basket_behavior.sql
+\`\`\`
 
-## Analytical Scope
+Each analysis is tied to a business question and includes methodological caveats.
 
-### MVP
+**[Open the analytical insights case study →](docs/analytical_insights.md)**
 
-- data quality and reproducible dbt transformations;
-- staging, intermediate models and analytical marts;
-- dimensional modeling;
-- Customer 360;
+---
+
+## Power BI Product
+
+The semantic model is already connected to validated BigQuery marts and versioned as a Power BI Project (PBIP/TMDL/PBIR).
+
+The final dashboard is designed around the validated findings rather than around isolated visuals.
+
+### Planned 3-page structure
+
+**1. Executive Overview**
+
+- business scale;
+- customer value concentration;
+- Champions / Loyal contribution;
+- At Risk exposure;
+- high-level CRM signals.
+
+**2. Customer 360**
+
 - RFM segmentation;
-- sales analytics;
-- descriptive campaign analytics;
-- promotions and coupon redemption analytics;
-- Power BI dashboard and DAX measures;
-- business insights and recommendations;
-- selective Python validation when it adds analytical value.
+- customer share vs revenue share;
+- purchase frequency, AOV and revenue/customer;
+- At Risk activity context;
+- product/category as a secondary explanatory dimension.
 
-## Post-MVP / Backlog
+**3. Campaign & Promotions**
 
-- Customer Lifetime Value;
-- churn / inactivity modeling;
-- Machine Learning;
-- causal campaign lift;
-- incremental revenue;
-- advanced customer clustering;
-- cohort analysis;
-- market basket analysis;
-- association rules.
+- household redemption;
+- campaign comparison;
+- campaign observation status;
+- promotional basket rate;
+- promotional revenue share;
+- promotional vs non-promotional basket value.
+
+---
+
+## Analytical Design Principles
+
+- Customer 360 / RFM uses the full transactional horizon **DAY 1–711**, with snapshot **DAY 711**.
+- Time is relative; calendar dates are not fabricated.
+- Campaign windows are capped at observed transactional coverage.
+- Campaign 24 is explicitly flagged as partially observed.
+- Purchase during a campaign is not presented as campaign-caused conversion.
+- Campaign revenue is descriptive and non-additive when windows overlap.
+- Promotion analysis preserves safe product-store-week grain before joining to sales.
+- \`display='A'\` is treated as **In-Shelf**, not as special display.
+- \`QUANTITY\` is not used as a universal unit-sales measure because fuel / special transactions contain incompatible scales.
+- Demographic coverage is partial and is not generalized to the entire customer universe.
+
+---
+
+## Analytical QA Snapshot
+
+Validated benchmarks include:
+
+- transactional customer universe: **2,500 households**
+- customers with demographic profile: **801**
+- repeat customers: **99.88%**
+- Customer 360 revenue: **8,057,463.08**
+- promotion-analysis coverage: **WEEK 9–101**
+- promotional basket rate: **55.66%**
+- promotional line revenue share: **19.62%**
+
+The RFM segmentation was also semantically reviewed: an initially misleading "New Customers" label was corrected to **Recent Low-Frequency** after the underlying behavior was inspected.
+
+---
+
+## Repository Structure
+
+\`\`\`text
+dbt/          transformation pipeline, tests and analytical marts
+sql/          profiling, QA and portfolio analytical SQL
+powerbi/      Power BI Project, semantic model and report assets
+docs/         public analytical documentation / case study
+images/       architecture, ERD and dashboard assets
+\`\`\`
+
+---
+
+## Current Status
+
+| Area | Status |
+|---|---|
+| Project definition & ingestion | ✅ Complete |
+| Data quality & profiling | ✅ Complete |
+| dbt staging | ✅ Complete |
+| Dimensional modeling | 🟢 Core complete; public ERD/docs pending |
+| Analytical marts | ✅ Complete |
+| Analytical QA | ✅ Complete |
+| Analytical exploration | ✅ Core findings documented |
+| Power BI semantic model & DAX | ✅ Initial version complete |
+| Dashboard visual design | 🚧 Next |
+| Portfolio packaging | 🚧 In progress |
+
+---
 
 ## Dataset
 
-Source:
-
 **dunnhumby — The Complete Journey**
 
-Raw/source data is stored in Google BigQuery under the dataset:
+Raw/source data is stored in Google BigQuery under:
 
-```text
+\`\`\`text
 customer360
-```
+\`\`\`
 
-The raw/source layer is treated as immutable. Cleaning and transformation logic is implemented downstream with dbt.
+The raw layer is treated as immutable. Cleaning, semantic normalization and analytical logic are implemented downstream with dbt.
 
-## Project Status
+---
 
-**Work in progress — Phase 09: Power BI.**
+## Scope Boundaries
 
+The current BI-first MVP intentionally excludes:
 
-### Analytical QA checkpoint
+- causal campaign lift;
+- incremental revenue attribution;
+- Customer Lifetime Value;
+- churn / inactivity prediction;
+- machine learning;
+- advanced cohorts;
+- market basket association rules;
+- real-time orchestration.
 
-Analytical QA confirmed:
-- customer universe = **2,500 households**;
-- demographic coverage = **801 households**;
-- repeat customers = **99.88%**;
-- total Customer 360 revenue = **8,057,463.08**;
-- promotion coverage = **WEEK 9–101 (93 weeks)**;
-- promotional basket rate = **55.66%**;
-- promotional revenue share = **19.62%**;
-- campaign metrics remained within valid descriptive ranges;
-- the low-frequency recent RFM segment was renamed to `Recent Low-Frequency` after semantic review.
-
-The RFM segment model was revalidated after the semantic correction with:
-
-```text
-PASS=6
-WARN=0
-ERROR=0
-SKIP=0
-```
+These are potential post-MVP extensions only when the methodology and data support them.
