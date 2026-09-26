@@ -69,7 +69,7 @@ Among fully observed campaigns:
 | TypeB | **7.95%** |
 | TypeC | **7.67%** |
 
-However, audience size is also positively associated with redemption (\`r = 0.604\`), so campaign type cannot be isolated as the causal explanation.
+However, audience size is also positively associated with redemption (`r = 0.604`), so campaign type cannot be isolated as the causal explanation.
 
 ### 5. Promotional baskets are much larger, but most of their value is not promotional
 
@@ -90,7 +90,7 @@ This is an association, not evidence that promotions caused larger baskets.
 
 The dashboard is designed **after** the analytical exploration, not before it.
 
-\`\`\`text
+```text
 CSV source files
         ↓
 Google Cloud Storage
@@ -112,7 +112,7 @@ validated findings + limitations
 Power BI semantic model + DAX
         ↓
 3-page decision-support dashboard
-\`\`\`
+```
 
 This workflow separates:
 
@@ -144,54 +144,54 @@ The transformation pipeline includes:
 
 ### Staging
 
-- \`stg_transactions\`
-- \`stg_products\`
-- \`stg_household_demographics\`
-- \`stg_campaigns\`
-- \`stg_campaign_assignments\`
-- \`stg_coupons\`
-- \`stg_coupon_redemptions\`
-- \`stg_promotions\`
+- `stg_transactions`
+- `stg_products`
+- `stg_household_demographics`
+- `stg_campaigns`
+- `stg_campaign_assignments`
+- `stg_coupons`
+- `stg_coupon_redemptions`
+- `stg_promotions`
 
 ### Intermediate
 
-- \`int_customer_metrics\`
-- \`int_customer_rfm\`
-- \`int_product_store_week_promotions\`
-- \`int_campaign_household_activity\`
-- \`int_transaction_promotions\`
-- \`int_basket_promotion_summary\`
+- `int_customer_metrics`
+- `int_customer_rfm`
+- `int_product_store_week_promotions`
+- `int_campaign_household_activity`
+- `int_transaction_promotions`
+- `int_basket_promotion_summary`
 
 ### Dimensions
 
-- \`dim_customer\`
-- \`dim_product\`
-- \`dim_campaign\`
-- \`dim_store\`
-- \`dim_relative_time\`
+- `dim_customer`
+- `dim_product`
+- `dim_campaign`
+- `dim_store`
+- `dim_relative_time`
 
 ### Facts
 
-- \`fact_sales\`
-- \`fact_campaign_received\`
-- \`fact_coupon_redemption\`
-- \`fact_promotions\`
+- `fact_sales`
+- `fact_campaign_received`
+- `fact_coupon_redemption`
+- `fact_promotions`
 
 ### Analytical Marts
 
-- \`mart_customer_360\`
-- \`mart_customer_segments\`
-- \`mart_campaign_performance\`
-- \`mart_promotion_performance\`
+- `mart_customer_360`
+- `mart_customer_segments`
+- `mart_campaign_performance`
+- `mart_promotion_performance`
 
 A full dbt project build completed with:
 
-\`\`\`text
+```text
 PASS=243
 WARN=0
 ERROR=0
 SKIP=0
-\`\`\`
+```
 
 ---
 
@@ -199,7 +199,7 @@ SKIP=0
 
 Portfolio-facing analytical SQL is versioned separately from profiling and QA:
 
-\`\`\`text
+```text
 sql/
 ├── qa/
 │   └── analytical_qa.sql
@@ -209,7 +209,7 @@ sql/
     ├── 03_customer_department_affinity.sql
     ├── 04_campaign_redemption_analysis.sql
     └── 05_promotional_basket_behavior.sql
-\`\`\`
+```
 
 Each analysis is tied to a business question and includes methodological caveats.
 
@@ -261,8 +261,8 @@ The final dashboard is designed around the validated findings rather than around
 - Purchase during a campaign is not presented as campaign-caused conversion.
 - Campaign revenue is descriptive and non-additive when windows overlap.
 - Promotion analysis preserves safe product-store-week grain before joining to sales.
-- \`display='A'\` is treated as **In-Shelf**, not as special display.
-- \`QUANTITY\` is not used as a universal unit-sales measure because fuel / special transactions contain incompatible scales.
+- `display='A'` is treated as **In-Shelf**, not as special display.
+- `QUANTITY` is not used as a universal unit-sales measure because fuel / special transactions contain incompatible scales.
 - Demographic coverage is partial and is not generalized to the entire customer universe.
 
 ---
@@ -285,13 +285,13 @@ The RFM segmentation was also semantically reviewed: an initially misleading "Ne
 
 ## Repository Structure
 
-\`\`\`text
+```text
 dbt/          transformation pipeline, tests and analytical marts
 sql/          profiling, QA and portfolio analytical SQL
 powerbi/      Power BI Project, semantic model and report assets
 docs/         public analytical documentation / case study
 images/       architecture, ERD and dashboard assets
-\`\`\`
+```
 
 ---
 
@@ -318,9 +318,9 @@ images/       architecture, ERD and dashboard assets
 
 Raw/source data is stored in Google BigQuery under:
 
-\`\`\`text
+```text
 customer360
-\`\`\`
+```
 
 The raw layer is treated as immutable. Cleaning, semantic normalization and analytical logic are implemented downstream with dbt.
 
