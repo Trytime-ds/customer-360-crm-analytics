@@ -97,6 +97,16 @@ table _Measures
 		displayFolder: 02 Customer
 		lineageTag: 60ce92d2-c044-475a-bc09-cf51e490934e
 
+	measure 'Active Customer Rate' = DIVIDE ( [Active Customers], [Customers] )
+		formatString: 0.00%
+		displayFolder: 02 Customer
+		lineageTag: 453ceadf-076b-407c-b5b1-f9b6f9a24b79
+
+	measure 'Value Concentration Index' = DIVIDE ( [Segment Revenue Share], [Segment Customer Share] )
+		formatString: 0.00
+		displayFolder: 02 Customer
+		lineageTag: 498d12e9-6e1b-4b42-939e-cef9033c62eb
+
 	measure Campaigns = DISTINCTCOUNT ( mart_campaign_performance[campaign_id] )
 		formatString: #,##0
 		displayFolder: 03 Campaign & Promotions
