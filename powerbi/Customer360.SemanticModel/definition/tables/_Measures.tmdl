@@ -202,6 +202,21 @@ table _Measures
 		displayFolder: 03 Campaign & Promotions
 		lineageTag: 3029850b-5839-46cc-a76b-6647cf244ed0
 
+	measure 'Revenue from Promotional Baskets' = SUM ( mart_promotion_performance[revenue_from_promotional_baskets] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 24dd3e38-0375-43e8-8c8f-ce6d433f966a
+
+	measure 'Revenue from Non-Promotional Baskets' = SUM ( mart_promotion_performance[revenue_from_non_promotional_baskets] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: e33275ac-faec-488d-a904-b6f11ac444a0
+
+	measure 'Non-Promotional Baskets' = [Promotion Window Baskets] - [Promotional Baskets]
+		formatString: #,##0
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: db2c0609-983c-4a89-928c-92c5892e5df2
+
 	measure 'Promotional Revenue' = SUM ( mart_promotion_performance[promotional_revenue] )
 		formatString: #,##0.00
 		displayFolder: 03 Campaign & Promotions
@@ -246,6 +261,31 @@ table _Measures
 		formatString: 0.00%
 		displayFolder: 03 Campaign & Promotions
 		lineageTag: 21eab965-9904-4fbf-8bf4-5550f355ad2b
+
+	measure 'Promotional Basket Revenue Share' = DIVIDE ( [Revenue from Promotional Baskets], [Promotion Window Revenue] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 32bb034f-3b2f-4434-961f-0e5ed87b7099
+
+	measure 'Promotional Intensity Inside Baskets' = DIVIDE ( [Promotional Revenue], [Revenue from Promotional Baskets] )
+		formatString: 0.00%
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 64d97e83-bc57-4396-b7a9-dbb6001d70a9
+
+	measure 'Average Promotional Basket Value' = DIVIDE ( [Revenue from Promotional Baskets], [Promotional Baskets] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 272245ed-2c1a-470b-a7ab-0134513b8722
+
+	measure 'Average Non-Promotional Basket Value' = DIVIDE ( [Revenue from Non-Promotional Baskets], [Non-Promotional Baskets] )
+		formatString: #,##0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 2ef5c0f6-8927-4a67-b011-637ea1ff5dd2
+
+	measure 'Promotional vs Non-Promotional Basket Value Ratio' = DIVIDE ( [Average Promotional Basket Value], [Average Non-Promotional Basket Value] )
+		formatString: 0.00
+		displayFolder: 03 Campaign & Promotions
+		lineageTag: 1c3b0486-feac-400a-8ac2-9e5f5cf4f686
 
 	measure 'Special Display Basket Rate' = DIVIDE ( [Baskets with Special Display], [Promotion Window Baskets] )
 		formatString: 0.00%
