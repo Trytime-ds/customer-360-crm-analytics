@@ -9,6 +9,10 @@ select
     ) as promotional_basket_rate,
 
     sum(basket_revenue) as total_revenue,
+    sum(if(has_promotional_condition, basket_revenue, 0))
+        as revenue_from_promotional_baskets,
+    sum(if(not has_promotional_condition, basket_revenue, 0))
+        as revenue_from_non_promotional_baskets,
     sum(promotional_revenue) as promotional_revenue,
     safe_divide(
         sum(promotional_revenue),
