@@ -20,3 +20,11 @@ createOrReplace
         measure 'Segment Revenue Share' = DIVIDE ( [Customer Revenue], CALCULATE ( [Customer Revenue], REMOVEFILTERS ( mart_customer_segments[customer_segment] ) ) )
             formatString: 0.00%
             displayFolder: "02 Customer"
+
+        measure 'Active Customer Rate' = DIVIDE ( [Active Customers], [Customers] )
+            formatString: 0.00%
+            displayFolder: "02 Customer"
+
+        measure 'Value Concentration Index' = DIVIDE ( [Segment Revenue Share], [Segment Customer Share] )
+            formatString: 0.00
+            displayFolder: "02 Customer"
