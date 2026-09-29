@@ -241,5 +241,9 @@ models:
         data_tests: [not_null]
       - name: total_revenue
         data_tests: [not_null]
+      - name: revenue_from_promotional_baskets
+        data_tests: [not_null]
+      - name: revenue_from_non_promotional_baskets
+        data_tests: [not_null]
       - name: promotional_revenue
         data_tests: [not_null]
