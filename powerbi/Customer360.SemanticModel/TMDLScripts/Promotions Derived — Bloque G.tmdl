@@ -9,6 +9,26 @@ createOrReplace
             formatString: 0.00%
             displayFolder: "03 Campaign & Promotions"
 
+        measure 'Promotional Basket Revenue Share' = DIVIDE ( [Revenue from Promotional Baskets], [Promotion Window Revenue] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotional Intensity Inside Baskets' = DIVIDE ( [Promotional Revenue], [Revenue from Promotional Baskets] )
+            formatString: 0.00%
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Average Promotional Basket Value' = DIVIDE ( [Revenue from Promotional Baskets], [Promotional Baskets] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Average Non-Promotional Basket Value' = DIVIDE ( [Revenue from Non-Promotional Baskets], [Non-Promotional Baskets] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Promotional vs Non-Promotional Basket Value Ratio' = DIVIDE ( [Average Promotional Basket Value], [Average Non-Promotional Basket Value] )
+            formatString: 0.00
+            displayFolder: "03 Campaign & Promotions"
+
         measure 'Special Display Basket Rate' = DIVIDE ( [Baskets with Special Display], [Promotion Window Baskets] )
             formatString: 0.00%
             displayFolder: "03 Campaign & Promotions"
