@@ -48,6 +48,26 @@ table mart_promotion_performance
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column revenue_from_promotional_baskets
+		dataType: double
+		lineageTag: 9e36b6c3-7c82-4d4c-ad06-28c4c88cfdd9
+		summarizeBy: sum
+		sourceColumn: revenue_from_promotional_baskets
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_from_non_promotional_baskets
+		dataType: double
+		lineageTag: 4298e4aa-c8a8-4dc0-aba2-068174dc0a69
+		summarizeBy: sum
+		sourceColumn: revenue_from_non_promotional_baskets
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column promotional_revenue
 		dataType: double
 		lineageTag: d3542636-db53-4515-a140-f43bbc739ce0
