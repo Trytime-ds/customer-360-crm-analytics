@@ -17,6 +17,18 @@ createOrReplace
             formatString: #,##0.00
             displayFolder: "03 Campaign & Promotions"
 
+        measure 'Revenue from Promotional Baskets' = SUM ( mart_promotion_performance[revenue_from_promotional_baskets] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Revenue from Non-Promotional Baskets' = SUM ( mart_promotion_performance[revenue_from_non_promotional_baskets] )
+            formatString: #,##0.00
+            displayFolder: "03 Campaign & Promotions"
+
+        measure 'Non-Promotional Baskets' = [Promotion Window Baskets] - [Promotional Baskets]
+            formatString: #,##0
+            displayFolder: "03 Campaign & Promotions"
+
         measure 'Promotional Revenue' = SUM ( mart_promotion_performance[promotional_revenue] )
             formatString: #,##0.00
             displayFolder: "03 Campaign & Promotions"
