@@ -1,42 +1,41 @@
 {
-  "name": "Customer360 Executive",
+  "name": "Customer360 Electric Executive",
   "dataColors": [
-    "#7BBDE8",
-    "#0A4174",
-    "#4E8EA2",
-    "#6EA2B3",
-    "#49769F",
-    "#001D39",
-    "#BDD8E9"
+    "#2948C2",
+    "#7BB7FF",
+    "#111835",
+    "#F4D532",
+    "#5B6B8A",
+    "#A9B8D0"
   ],
-  "good": "#4E8EA2",
-  "neutral": "#7BBDE8",
-  "bad": "#A95D5D",
-  "foreground": "#001D39",
-  "foregroundNeutralSecondary": "#49769F",
-  "background": "#FFFFFF",
-  "backgroundLight": "#F4F8FB",
-  "tableAccent": "#0A4174",
+  "good": "#2948C2",
+  "neutral": "#F4D532",
+  "bad": "#B25B64",
+  "foreground": "#111835",
+  "foregroundNeutralSecondary": "#5B6B8A",
+  "background": "#FBFDFC",
+  "backgroundLight": "#F3F6FB",
+  "tableAccent": "#2948C2",
   "textClasses": {
     "callout": {
-      "fontSize": 28,
+      "fontSize": 30,
       "fontFace": "Segoe UI Semibold",
-      "color": "#001D39"
+      "color": "#111835"
     },
     "title": {
       "fontSize": 13,
       "fontFace": "Segoe UI Semibold",
-      "color": "#001D39"
+      "color": "#111835"
     },
     "header": {
       "fontSize": 12,
       "fontFace": "Segoe UI Semibold",
-      "color": "#001D39"
+      "color": "#111835"
     },
     "label": {
-      "fontSize": 10,
+      "fontSize": 11,
       "fontFace": "Segoe UI",
-      "color": "#4E8EA2"
+      "color": "#5B6B8A"
     }
   }
 }

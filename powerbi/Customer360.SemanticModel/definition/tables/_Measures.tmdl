@@ -32,6 +32,18 @@ table _Measures
 		displayFolder: 01 Executive
 		lineageTag: e8667c38-6bda-45da-8bfc-ce7abf1b5a88
 
+	measure 'KPI Revenue Display' = "$" & FORMAT ( DIVIDE ( [Total Revenue], 1000000 ), "0.00", "en-US" ) & "M"
+		displayFolder: 01 Executive\Display
+		lineageTag: 9c13a4bb-2d6f-4bf0-947f-9d870b54bf10
+
+	measure 'KPI Customers Display' = FORMAT ( [Customers], "#,##0", "en-US" )
+		displayFolder: 01 Executive\Display
+		lineageTag: 42f21af5-9ee5-4b71-8ccf-5c4f98ceac94
+
+	measure 'KPI Purchase Frequency Display' = FORMAT ( [Purchase Frequency], "0.0", "en-US" )
+		displayFolder: 01 Executive\Display
+		lineageTag: 75d6fd11-1838-4d6f-8f0e-f9adbdc6d743
+
 	measure Customers = DISTINCTCOUNT ( mart_customer_segments[household_id] )
 		formatString: #,##0
 		displayFolder: 02 Customer

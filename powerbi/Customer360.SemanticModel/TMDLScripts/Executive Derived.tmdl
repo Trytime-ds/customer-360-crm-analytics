@@ -12,3 +12,12 @@ createOrReplace
         measure 'Revenue per Customer' = DIVIDE ( [Total Revenue], [Active Customers] )
             formatString: #,##0.00
             displayFolder: "01 Executive"
+
+        measure 'KPI Revenue Display' = "$" & FORMAT ( DIVIDE ( [Total Revenue], 1000000 ), "0.00", "en-US" ) & "M"
+            displayFolder: "01 Executive\Display"
+
+        measure 'KPI Customers Display' = FORMAT ( [Customers], "#,##0", "en-US" )
+            displayFolder: "01 Executive\Display"
+
+        measure 'KPI Purchase Frequency Display' = FORMAT ( [Purchase Frequency], "0.0", "en-US" )
+            displayFolder: "01 Executive\Display"
