@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "c2m00000000000000009",
   "position": {
-    "x": 1220,
-    "y": 352,
+    "x": 1212.2699386503066,
+    "y": 348.46625766871165,
     "z": 6000,
-    "width": 620,
-    "height": 285,
+    "width": 634.1104294478528,
+    "height": 293.4969325153374,
     "tabOrder": 11
   },
   "visual": {
@@ -353,6 +353,36 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "79.94478619257995D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Measures.Customers"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "144.91595801726623D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "mart_customer_segments.customer_segment"
           }
         }
       ]
