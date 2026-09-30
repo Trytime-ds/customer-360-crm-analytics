@@ -3,7 +3,7 @@
   "name": "c2k00000000000000002",
   "position": {
     "x": 505,
-    "y": 122,
+    "y": 115,
     "z": 5000,
     "width": 430,
     "height": 120,
@@ -65,7 +65,7 @@
             "labelDisplayUnits": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "1D"
                 }
               }
             },
@@ -345,13 +345,6 @@
               "expr": {
                 "Literal": {
                   "Value": "9D"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
                 }
               }
             },

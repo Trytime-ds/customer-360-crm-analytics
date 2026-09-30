@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "c2h00000000000000003",
   "position": {
-    "x": 1480,
-    "y": 30,
+    "x": 1450,
+    "y": 35,
     "z": 22000,
-    "width": 380,
-    "height": 54,
+    "width": 410,
+    "height": 40,
     "tabOrder": 2
   },
   "visual": {
@@ -19,26 +19,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "CUSTOMER 360 · RFM VIEW",
+                    "value": "RFM CUSTOMER VIEW · 2,500 HOUSEHOLDS",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
                       "fontWeight": "bold",
                       "color": "#111835"
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "center"
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "2,500 households · full customer mart",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "9pt",
-                      "fontWeight": "normal",
-                      "color": "#5B6B8A"
                     }
                   }
                 ],
@@ -152,28 +138,28 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "7D"
+                  "Value": "8D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "7D"
+                  "Value": "8D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "7D"
+                  "Value": "8D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "7D"
+                  "Value": "8D"
                 }
               }
             }

@@ -3,10 +3,10 @@
   "name": "c2b00000000000000008",
   "position": {
     "x": 1235,
-    "y": 925,
+    "y": 920,
     "z": 7000,
     "width": 580,
-    "height": 55,
+    "height": 48,
     "tabOrder": 17
   },
   "visual": {
@@ -19,12 +19,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "Demographic variables describe only customers with an available profile; they should not be treated as representative of the full base.",
+                    "value": "Demographic profiles cover only a subset of the base; demographic breakdowns should not be treated as representative of all customers.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
                       "fontWeight": "normal",
-                      "color": "#D9E2F1"
+                      "color": "#DCE9FF"
                     }
                   }
                 ],

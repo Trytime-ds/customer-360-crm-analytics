@@ -3,10 +3,10 @@
   "name": "c2b00000000000000001",
   "position": {
     "x": 55,
-    "y": 705,
+    "y": 690,
     "z": 6000,
     "width": 555,
-    "height": 255,
+    "height": 300,
     "tabOrder": 12
   },
   "visual": {
@@ -108,7 +108,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "18L"
+                  "Value": "16L"
                 }
               }
             },
@@ -194,7 +194,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Average historical baskets per customer'"
+                  "Value": "'Large behavioral separation across segments'"
                 }
               }
             },
@@ -203,7 +203,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5B6B8A'"
+                      "Value": "'#2948C2'"
                     }
                   }
                 }
@@ -275,7 +275,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10L"
+                  "Value": "9L"
                 }
               }
             },
@@ -347,7 +347,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "9L"
+                  "Value": "8L"
                 }
               }
             }
@@ -364,6 +364,32 @@
                 }
               }
             }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2948C2'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
           }
         }
       ]
