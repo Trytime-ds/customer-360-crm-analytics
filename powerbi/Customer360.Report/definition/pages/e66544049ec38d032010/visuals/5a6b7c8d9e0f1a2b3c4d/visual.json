@@ -7,7 +7,7 @@
     "z": 6000,
     "width": 1120,
     "height": 370,
-    "tabOrder": 5
+    "tabOrder": 6
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -148,7 +148,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'31.5% of customers generate 61.0% of historical revenue'"
+                  "Value": "'Value concentration by customer segment'"
                 }
               }
             },
@@ -187,7 +187,7 @@
             "titleWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
@@ -198,6 +198,45 @@
         {
           "properties": {
             "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Compare customer share with revenue share across the RFM segmentation'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#49769F'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
+                }
+              }
+            },
+            "titleWrap": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -232,13 +271,6 @@
               }
             },
             "showFilterRestatementButton": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "showCopyVisualImageButton": {
               "expr": {
                 "Literal": {
                   "Value": "false"

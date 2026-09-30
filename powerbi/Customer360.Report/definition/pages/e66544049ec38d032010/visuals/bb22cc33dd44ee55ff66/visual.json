@@ -7,7 +7,7 @@
     "z": 13000,
     "width": 860,
     "height": 300,
-    "tabOrder": 8
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "textbox",
@@ -24,7 +24,7 @@
                       "fontFamily": "Segoe UI",
                       "fontSize": "10pt",
                       "fontWeight": "bold",
-                      "color": "#4E8EA2"
+                      "color": "#7BBDE8"
                     }
                   }
                 ],
@@ -36,18 +36,18 @@
                     "value": "2.76×",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
-                      "fontSize": "27pt",
+                      "fontSize": "34pt",
                       "fontWeight": "bold",
-                      "color": "#0A4174"
+                      "color": "#FFFFFF"
                     }
                   },
                   {
                     "value": "  higher average basket value",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
-                      "fontSize": "15pt",
+                      "fontSize": "16pt",
                       "fontWeight": "bold",
-                      "color": "#001D39"
+                      "color": "#BDD8E9"
                     }
                   }
                 ],
@@ -56,12 +56,26 @@
               {
                 "textRuns": [
                   {
-                    "value": "Promotional baskets account for 77.6% of revenue in the promotion window.",
+                    "value": "77.6% of promotion-window revenue comes from promotional baskets.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "12pt",
+                      "fontWeight": "bold",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Only 25.3% of revenue inside those baskets comes from promotional lines.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "11pt",
                       "fontWeight": "normal",
-                      "color": "#001D39"
+                      "color": "#BDD8E9"
                     }
                   }
                 ],
@@ -70,26 +84,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "Yet only 25.3% of revenue inside those baskets comes from promotional lines.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "11pt",
-                      "fontWeight": "normal",
-                      "color": "#001D39"
-                    }
-                  }
-                ],
-                "horizontalTextAlignment": "left"
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Promotions coexist with broader high-value baskets; this is association, not causal uplift.",
+                    "value": "Association, not causal uplift: promotions coexist with broader high-value baskets.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
                       "fontWeight": "normal",
-                      "color": "#6EA2B3"
+                      "color": "#7BBDE8"
                     }
                   }
                 ],
@@ -116,7 +116,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#0A4174'"
                     }
                   }
                 }
@@ -138,7 +138,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -147,7 +147,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#BDD8E9'"
+                      "Value": "'#0A4174'"
                     }
                   }
                 }
@@ -193,13 +193,6 @@
                   "Value": "false"
                 }
               }
-            },
-            "showFilterRestatementButton": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
             }
           }
         }
@@ -210,28 +203,28 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "24D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "24D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "22D"
+                  "Value": "24D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "22D"
+                  "Value": "24D"
                 }
               }
             }
