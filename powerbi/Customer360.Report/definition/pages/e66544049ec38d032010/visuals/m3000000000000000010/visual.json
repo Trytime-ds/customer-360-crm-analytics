@@ -3,10 +3,10 @@
   "name": "m3000000000000000010",
   "position": {
     "x": 1270,
-    "y": 555,
+    "y": 540,
     "z": 7100,
     "width": 560,
-    "height": 82,
+    "height": 105,
     "tabOrder": 11
   },
   "visual": {
@@ -141,14 +141,14 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "10D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "10D"
                 }
               }
             },

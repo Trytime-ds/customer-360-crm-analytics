@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "KPI Purchase Frequency Display"
+                  "Property": "Purchase Frequency"
                 }
               },
-              "queryRef": "_Measures.KPI Purchase Frequency Display",
-              "nativeQueryRef": "KPI Purchase Frequency Display"
+              "queryRef": "_Measures.Purchase Frequency",
+              "nativeQueryRef": "Purchase Frequency"
             }
           ]
         }
@@ -59,6 +59,20 @@
                       "Value": "'#111835'"
                     }
                   }
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "1L"
                 }
               }
             }

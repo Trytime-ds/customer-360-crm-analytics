@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "KPI Customers Display"
+                  "Property": "Customers"
                 }
               },
-              "queryRef": "_Measures.KPI Customers Display",
-              "nativeQueryRef": "KPI Customers Display"
+              "queryRef": "_Measures.Customers",
+              "nativeQueryRef": "Customers"
             }
           ]
         }
@@ -59,6 +59,20 @@
                       "Value": "'#111835'"
                     }
                   }
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
                 }
               }
             }

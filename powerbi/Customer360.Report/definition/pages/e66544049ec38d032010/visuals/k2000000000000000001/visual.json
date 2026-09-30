@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "KPI Revenue Display"
+                  "Property": "Total Revenue"
                 }
               },
-              "queryRef": "_Measures.KPI Revenue Display",
-              "nativeQueryRef": "KPI Revenue Display"
+              "queryRef": "_Measures.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
             }
           ]
         }
@@ -59,6 +59,20 @@
                       "Value": "'#111835'"
                     }
                   }
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
                 }
               }
             }

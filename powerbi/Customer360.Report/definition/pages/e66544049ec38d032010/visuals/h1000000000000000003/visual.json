@@ -3,10 +3,10 @@
   "name": "h1000000000000000003",
   "position": {
     "x": 1300,
-    "y": 28,
+    "y": 24,
     "z": 22000,
     "width": 310,
-    "height": 58,
+    "height": 68,
     "tabOrder": 2
   },
   "visual": {
@@ -152,14 +152,14 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "7D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "9D"
+                  "Value": "7D"
                 }
               }
             },
