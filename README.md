@@ -4,7 +4,7 @@ End-to-end Data Analytics and Business Intelligence portfolio project focused on
 
 The project uses the dunnhumby **The Complete Journey** dataset to build a reproducible workflow from raw retail transactions to validated analytical marts, documented business insights and a Power BI decision-support dashboard.
 
-> **Current stage:** analytical insights documented; dashboard blueprint and final Power BI visual design in progress.
+> **Current stage:** MVP complete — validated dbt pipeline, analytical marts, documented insights and a finalized 3-page Power BI dashboard.
 
 ---
 
@@ -184,10 +184,10 @@ The transformation pipeline includes:
 - `mart_campaign_performance`
 - `mart_promotion_performance`
 
-A full dbt project build completed with:
+A final full-project dbt validation completed with:
 
 ```text
-PASS=243
+PASS=245
 WARN=0
 ERROR=0
 SKIP=0
@@ -219,11 +219,11 @@ Each analysis is tied to a business question and includes methodological caveats
 
 ## Power BI Product
 
-The semantic model is already connected to validated BigQuery marts and versioned as a Power BI Project (PBIP/TMDL/PBIR).
+The semantic model is connected to validated BigQuery marts and versioned as a Power BI Project using PBIP / TMDL / PBIR source files.
 
-The final dashboard is designed around the validated findings rather than around isolated visuals.
+The completed dashboard is designed around the validated findings rather than around isolated visuals.
 
-### Planned 3-page structure
+### Final 3-page structure
 
 **1. Executive Overview**
 
@@ -302,13 +302,13 @@ images/       architecture, ERD and dashboard assets
 | Project definition & ingestion | ✅ Complete |
 | Data quality & profiling | ✅ Complete |
 | dbt staging | ✅ Complete |
-| Dimensional modeling | 🟢 Core complete; public ERD/docs pending |
+| Dimensional modeling | ✅ Complete; public ERD asset pending |
 | Analytical marts | ✅ Complete |
-| Analytical QA | ✅ Complete |
-| Analytical exploration | ✅ Core findings documented |
-| Power BI semantic model & DAX | ✅ Initial version complete |
-| Dashboard visual design | 🚧 Next |
-| Portfolio packaging | 🚧 In progress |
+| Analytical QA | ✅ Complete — final `dbt build` PASS=245 |
+| Analytical exploration | ✅ Complete; primary findings documented |
+| Power BI semantic model & DAX | ✅ Complete |
+| Dashboard visual design | ✅ Complete — 3 final pages |
+| Portfolio packaging | 🚧 Final screenshots / ERD / recruiter-facing polish |
 
 ---
 
