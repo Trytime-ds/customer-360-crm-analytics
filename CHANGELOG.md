@@ -26,6 +26,7 @@ All notable project milestones and structural changes will be documented in this
 - `mart_campaign_performance`.
 - `mart_promotion_performance`.
 - Schema documentation, generic dbt tests and singular business/data-quality tests across staging, intermediate and marts.
+- Version-controlled Power BI Project (PBIP/TMDL/PBIR) with a finalized 3-page dashboard: Executive Overview, Customer 360, and Campaign & Promotions.
 
 ### Changed
 
@@ -52,6 +53,7 @@ All notable project milestones and structural changes will be documented in this
 - Customer, campaign and promotion marts include grain, coverage and business-rule tests.
 - Phase 05 closed with **8/8 staging models implemented** and **73/73 staging tests passing**.
 - Full project validation completed with `dbt build`: **PASS=243, WARN=0, ERROR=0, SKIP=0**.
+- Final project-close validation completed with `dbt build`: **PASS=245, WARN=0, ERROR=0, SKIP=0**.
 - Analytical QA validated customer, RFM, campaign and promotion outputs before BI consumption.
 - RFM segment model revalidated after semantic relabeling: **PASS=6, WARN=0, ERROR=0, SKIP=0**.
 
@@ -63,9 +65,11 @@ All notable project milestones and structural changes will be documented in this
 - Phase 03 — Raw Ingestion: complete.
 - Phase 04 — Data Quality: complete.
 - Phase 05 — Staging & dbt: complete.
-- Phase 06 — Dimensional Modeling: core model implementation complete; ERD/documentation pending.
-- Phase 07 — Analytical Marts: core mart implementation and analytical output QA complete.
-- Phase 09 — Power BI: current implementation focus.
+- Phase 06 — Dimensional Modeling: implementation complete; public ERD asset pending.
+- Phase 07 — Analytical Marts: complete.
+- Phase 08 — Analytical Exploration & Insight Validation: complete.
+- Phase 09 — Power BI semantic model, DAX and 3-page dashboard: complete.
+- Phase 10 — Portfolio packaging: final screenshots, ERD and recruiter-facing repository polish in progress.
 - Known blockers: none.
 
 ### Milestones
