@@ -69,8 +69,16 @@ All notable project milestones and structural changes will be documented in this
 - Phase 07 — Analytical Marts: complete.
 - Phase 08 — Analytical Exploration & Insight Validation: complete.
 - Phase 09 — Power BI semantic model, DAX and 3-page dashboard: complete.
-- Phase 10 — Portfolio packaging: final screenshots, ERD and recruiter-facing repository polish in progress.
+- Phase 10 — Portfolio packaging: complete — final screenshots, architecture/model diagrams and recruiter-facing repository polish included.
 - Known blockers: none.
+
+### Final Closure
+
+- Customer 360 MVP formally closed after final technical QA and portfolio packaging.
+- Final full-project validation: **PASS=245, WARN=0, ERROR=0, SKIP=0**.
+- Final Power BI product: **Executive Overview**, **Customer 360**, and **Campaign & Promotions**.
+- Public portfolio assets added under `images/dashboard/`, `images/architecture/`, and `images/model/`.
+- Next step moved outside the project build itself: CV / LinkedIn / project publication and interview use.
 
 ### Milestones
 
