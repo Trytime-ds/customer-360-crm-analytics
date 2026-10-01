@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930">
+  <defs>
+    <style>
+      .bg{fill:#F4F6FA}.box{fill:#FFFFFF;stroke:#D9E2F1;stroke-width:2}.fact{fill:#111835}.mart{fill:#2948C2}.accent{fill:#F4D532}
+      .title{font:700 34px 'Segoe UI',Arial,sans-serif;fill:#111835}.sub{font:400 18px 'Segoe UI',Arial,sans-serif;fill:#5B6B8A}
+      .th{font:700 19px 'Segoe UI',Arial,sans-serif;fill:#FFFFFF}.h{font:700 18px 'Segoe UI',Arial,sans-serif;fill:#111835}
+      .t{font:400 15px 'Segoe UI',Arial,sans-serif;fill:#5B6B8A}.key{font:700 15px 'Segoe UI',Arial,sans-serif;fill:#2948C2}
+      .rel{stroke:#7B8BAA;stroke-width:3;fill:none}.dash{stroke:#A9B8D0;stroke-width:2;fill:none;stroke-dasharray:8 8}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="930"/>
+  <text class="title" x="70" y="70">Customer 360 — Power BI Semantic Model</text>
+  <text class="sub" x="70" y="105">Core report relationships plus standalone campaign and promotion marts used by the final dashboard</text>
+
+  <!-- center fact -->
+  <rect class="box" x="620" y="320" rx="18" width="330" height="270"/>
+  <rect class="fact" x="620" y="320" rx="18" width="330" height="56"/>
+  <text class="th" x="646" y="355">fact_sales</text>
+  <text class="key" x="646" y="414">household_id</text>
+  <text class="key" x="646" y="445">product_id</text>
+  <text class="key" x="646" y="476">store_id</text>
+  <text class="key" x="646" y="507">day_number</text>
+  <text class="t" x="646" y="538">basket_id · sales_value</text>
+  <text class="t" x="646" y="566">transaction-level analytical fact</text>
+
+  <!-- customer -->
+  <rect class="box" x="90" y="260" rx="18" width="360" height="300"/>
+  <rect class="mart" x="90" y="260" rx="18" width="360" height="56"/>
+  <text class="th" x="116" y="295">mart_customer_segments</text>
+  <text class="key" x="116" y="354">household_id</text>
+  <text class="t" x="116" y="385">customer_segment</text>
+  <text class="t" x="116" y="416">recency_days · basket_count</text>
+  <text class="t" x="116" y="447">monetary_value · average_order_value</text>
+  <text class="t" x="116" y="478">RFM scores · campaign history</text>
+  <text class="t" x="116" y="509">optional demographic attributes</text>
+
+  <!-- dimensions -->
+  <rect class="box" x="1110" y="180" rx="18" width="360" height="170"/>
+  <rect class="mart" x="1110" y="180" rx="18" width="360" height="52"/>
+  <text class="th" x="1136" y="214">dim_product</text>
+  <text class="key" x="1136" y="269">product_id</text>
+  <text class="t" x="1136" y="300">department · commodity · brand</text>
+  <text class="t" x="1136" y="328">product attributes</text>
+
+  <rect class="box" x="1110" y="390" rx="18" width="360" height="150"/>
+  <rect class="mart" x="1110" y="390" rx="18" width="360" height="52"/>
+  <text class="th" x="1136" y="424">dim_store</text>
+  <text class="key" x="1136" y="479">store_id</text>
+  <text class="t" x="1136" y="510">store dimension</text>
+
+  <rect class="box" x="1110" y="580" rx="18" width="360" height="170"/>
+  <rect class="mart" x="1110" y="580" rx="18" width="360" height="52"/>
+  <text class="th" x="1136" y="614">dim_relative_time</text>
+  <text class="key" x="1136" y="669">day_number</text>
+  <text class="t" x="1136" y="700">relative week / time context</text>
+  <text class="t" x="1136" y="728">no fabricated calendar dates</text>
+
+  <!-- relationships -->
+  <path class="rel" d="M450 410 H620"/>
+  <path class="rel" d="M950 420 H1040 V265 H1110"/>
+  <path class="rel" d="M950 475 H1110"/>
+  <path class="rel" d="M950 530 H1040 V665 H1110"/>
+  <text class="t" x="478" y="395">household_id</text>
+  <text class="t" x="1020" y="250">product_id</text>
+  <text class="t" x="1000" y="460">store_id</text>
+  <text class="t" x="1004" y="650">day_number</text>
+
+  <!-- standalone marts -->
+  <rect class="box" x="90" y="665" rx="18" width="450" height="180"/>
+  <rect class="fact" x="90" y="665" rx="18" width="450" height="52"/>
+  <text class="th" x="116" y="699">mart_campaign_performance</text>
+  <text class="key" x="116" y="754">campaign_id</text>
+  <text class="t" x="116" y="785">targeting · purchase rate · redemption</text>
+  <text class="t" x="116" y="815">descriptive campaign revenue</text>
+
+  <rect class="box" x="600" y="665" rx="18" width="450" height="180"/>
+  <rect class="fact" x="600" y="665" rx="18" width="450" height="52"/>
+  <text class="th" x="626" y="699">mart_promotion_performance</text>
+  <text class="key" x="626" y="754">week_number</text>
+  <text class="t" x="626" y="785">promotional baskets · revenue share</text>
+  <text class="t" x="626" y="815">basket value · promotion intensity</text>
+
+  <path class="dash" d="M540 755 H575"/>
+  <path class="dash" d="M1050 755 H1085"/>
+  <text class="t" x="1110" y="798">Campaign and promotion marts are intentionally</text>
+  <text class="t" x="1110" y="824">standalone in the semantic model to preserve</text>
+  <text class="t" x="1110" y="850">their validated analytical grains.</text>
+
+  <rect class="accent" x="70" y="885" width="80" height="5" rx="2"/>
+  <text class="sub" x="170" y="894">Core relationship design used by the final Power BI report.</text>
+</svg>
