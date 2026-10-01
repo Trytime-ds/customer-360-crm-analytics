@@ -6,6 +6,8 @@ The project uses the dunnhumby **The Complete Journey** dataset to build a repro
 
 > **Current stage:** MVP complete — validated dbt pipeline, analytical marts, documented insights and a finalized 3-page Power BI dashboard.
 
+![Executive Overview](images/dashboard/executive_overview.png)
+
 ---
 
 ## Business Problem
@@ -229,11 +231,17 @@ The completed dashboard is designed around the validated findings rather than ar
 
 ### Dashboard Preview
 
-Final portfolio screenshots are stored under `images/dashboard/`:
+**1. Executive Overview**
 
-- `executive_overview.png`
-- `customer_360.png`
-- `campaign_promotions.png`
+![Executive Overview](images/dashboard/executive_overview.png)
+
+**2. Customer 360**
+
+![Customer 360](images/dashboard/customer_360.png)
+
+**3. Campaign & Promotions**
+
+![Campaign & Promotions](images/dashboard/campaign_promotions.png)
 
 ### Final 3-page structure
 
@@ -314,13 +322,13 @@ images/       architecture, ERD and dashboard assets
 | Project definition & ingestion | ✅ Complete |
 | Data quality & profiling | ✅ Complete |
 | dbt staging | ✅ Complete |
-| Dimensional modeling | ✅ Complete; public ERD asset pending |
+| Dimensional modeling | ✅ Complete — public semantic model diagram included |
 | Analytical marts | ✅ Complete |
 | Analytical QA | ✅ Complete — final `dbt build` PASS=245 |
 | Analytical exploration | ✅ Complete; primary findings documented |
 | Power BI semantic model & DAX | ✅ Complete |
 | Dashboard visual design | ✅ Complete — 3 final pages |
-| Portfolio packaging | 🚧 Final screenshots / ERD / recruiter-facing polish |
+| Portfolio packaging | ✅ Complete — screenshots, architecture and model assets included |
 
 ---
 
