@@ -88,6 +88,8 @@ This is an association, not evidence that promotions caused larger baskets.
 
 ## Analytical Workflow
 
+![Customer 360 end-to-end architecture](images/architecture/customer360_architecture.svg)
+
 The dashboard is designed **after** the analytical exploration, not before it.
 
 ```text
@@ -139,6 +141,8 @@ Python remains a post-MVP / complementary option rather than a dependency of the
 ---
 
 ## Data Model & Analytical Layer
+
+![Customer 360 Power BI semantic model](images/model/customer360_semantic_model.svg)
 
 The transformation pipeline includes:
 
@@ -222,6 +226,14 @@ Each analysis is tied to a business question and includes methodological caveats
 The semantic model is connected to validated BigQuery marts and versioned as a Power BI Project using PBIP / TMDL / PBIR source files.
 
 The completed dashboard is designed around the validated findings rather than around isolated visuals.
+
+### Dashboard Preview
+
+Final portfolio screenshots are stored under `images/dashboard/`:
+
+- `executive_overview.png`
+- `customer_360.png`
+- `campaign_promotions.png`
 
 ### Final 3-page structure
 
